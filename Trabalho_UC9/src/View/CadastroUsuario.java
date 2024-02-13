@@ -4,6 +4,12 @@
  */
 package View;
 
+import Controller.UsuarioController;
+import Model.UsuarioModel;
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author User
@@ -15,6 +21,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
      */
     public CadastroUsuario() {
         initComponents();
+        listarUsuariosView();
     }
 
     /**
@@ -26,194 +33,405 @@ public class CadastroUsuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-
-        jLabel6.setText("jLabel6");
+        JTUsuario = new javax.swing.JTable();
+        JPButtons = new javax.swing.JPanel();
+        BtnDeletar = new javax.swing.JButton();
+        BtnAlterar = new javax.swing.JButton();
+        BtnSalvar = new javax.swing.JButton();
+        JLPesquisa = new javax.swing.JLabel();
+        TxtPesquisa = new javax.swing.JTextField();
+        BtnPesquisa = new javax.swing.JButton();
+        BtnConfirma = new javax.swing.JButton();
+        LBId = new javax.swing.JLabel();
+        JPCadastroUsuario = new javax.swing.JPanel();
+        JLCpf = new javax.swing.JLabel();
+        JLEndereço = new javax.swing.JLabel();
+        JFDataNas = new javax.swing.JFormattedTextField();
+        JLNascimento = new javax.swing.JLabel();
+        TxtEndereço = new javax.swing.JTextField();
+        JLEmail = new javax.swing.JLabel();
+        TxtEmail = new javax.swing.JTextField();
+        JFCpf = new javax.swing.JFormattedTextField();
+        JLTitulo = new javax.swing.JLabel();
+        JLNome = new javax.swing.JLabel();
+        TxtNome = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton1.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jButton1.setText("Salvar");
-
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-        jLabel1.setText("Nome Completo");
-
-        jTextField1.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-        jLabel2.setText("CPF");
-
-        jLabel3.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-        jLabel3.setText("Endereço");
-
-        try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("  ##  /  ##  /  ####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jFormattedTextField1.setText(" ");
-        jFormattedTextField1.setToolTipText("");
-
-        jLabel4.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-        jLabel4.setText("Data de Nascimento");
-
-        jTextField3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-        jLabel5.setText("E-mail");
-
-        jTextField4.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-
-        try {
-            jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("   ###.###.###-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jFormattedTextField2.setText("     .    .   -  ");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        JTUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Nome", "CPF", "E-mail", "Endereço", "Data de Nascimento"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false, false, false
+            };
 
-        jButton4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton4.setText("Deletar");
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
-        jButton5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton5.setText("Alterar");
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        JTUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JTUsuarioMouseClicked(evt);
+            }
+        });
+        JTUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JTUsuarioKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JTUsuarioKeyReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(JTUsuario);
 
-        jLabel7.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("cadastro de usuário ");
+        JPButtons.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+
+        BtnDeletar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        BtnDeletar.setText("Deletar");
+        BtnDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnDeletarActionPerformed(evt);
+            }
+        });
+
+        BtnAlterar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        BtnAlterar.setText("Alterar");
+        BtnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAlterarActionPerformed(evt);
+            }
+        });
+
+        BtnSalvar.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        BtnSalvar.setText("Salvar");
+        BtnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSalvarActionPerformed(evt);
+            }
+        });
+
+        JLPesquisa.setText("Pesquisa: ");
+
+        TxtPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtPesquisaActionPerformed(evt);
+            }
+        });
+
+        BtnPesquisa.setText("Pesquisar");
+        BtnPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPesquisaActionPerformed(evt);
+            }
+        });
+
+        BtnConfirma.setText("Confirmar Alteração");
+        BtnConfirma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnConfirmaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout JPButtonsLayout = new javax.swing.GroupLayout(JPButtons);
+        JPButtons.setLayout(JPButtonsLayout);
+        JPButtonsLayout.setHorizontalGroup(
+            JPButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPButtonsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(BtnSalvar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(BtnDeletar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnAlterar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(BtnConfirma)
+                .addGap(36, 36, 36)
+                .addComponent(JLPesquisa)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TxtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(BtnPesquisa)
+                .addContainerGap())
+        );
+        JPButtonsLayout.setVerticalGroup(
+            JPButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPButtonsLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(JPButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnAlterar)
+                    .addComponent(BtnSalvar)
+                    .addComponent(BtnDeletar)
+                    .addComponent(JLPesquisa)
+                    .addComponent(TxtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnPesquisa)
+                    .addComponent(BtnConfirma))
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
+        LBId.setText("          ");
+
+        JPCadastroUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+
+        JLCpf.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        JLCpf.setText("CPF");
+
+        JLEndereço.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        JLEndereço.setText("Endereço");
+
+        try {
+            JFDataNas.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("  ##  /  ##  /  ####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        JFDataNas.setText(" ");
+        JFDataNas.setToolTipText("");
+
+        JLNascimento.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        JLNascimento.setText("Data de Nascimento");
+
+        TxtEndereço.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        TxtEndereço.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtEndereçoActionPerformed(evt);
+            }
+        });
+
+        JLEmail.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        JLEmail.setText("E-mail");
+
+        TxtEmail.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        try {
+            JFCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("   ###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        JFCpf.setText("     .    .   -  ");
+
+        JLTitulo.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        JLTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLTitulo.setText("Cadastro de Usuário ");
+
+        JLNome.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        JLNome.setText("Nome Completo");
+
+        TxtNome.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        TxtNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtNomeActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout JPCadastroUsuarioLayout = new javax.swing.GroupLayout(JPCadastroUsuario);
+        JPCadastroUsuario.setLayout(JPCadastroUsuarioLayout);
+        JPCadastroUsuarioLayout.setHorizontalGroup(
+            JPCadastroUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPCadastroUsuarioLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(JPCadastroUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JLNome)
+                    .addComponent(JLNascimento)
+                    .addComponent(JLCpf)
+                    .addComponent(JLEndereço, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JLEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addGroup(JPCadastroUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(JPCadastroUsuarioLayout.createSequentialGroup()
+                        .addGroup(JPCadastroUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(JFDataNas, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(JFCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtEndereço, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(JPCadastroUsuarioLayout.createSequentialGroup()
+                        .addComponent(JLTitulo)))
+                .addGap(304, 304, 304))
+        );
+        JPCadastroUsuarioLayout.setVerticalGroup(
+            JPCadastroUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPCadastroUsuarioLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(JLTitulo)
+                .addGap(18, 18, 18)
+                .addGroup(JPCadastroUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JLNome)
+                    .addComponent(TxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(JPCadastroUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(JLNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JFDataNas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(JPCadastroUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JLCpf)
+                    .addComponent(JFCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(JPCadastroUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JLEndereço)
+                    .addComponent(TxtEndereço, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(JPCadastroUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JLEmail)
+                    .addComponent(TxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4)
-                        .addGap(11, 11, 11))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(358, 358, 358)
-                                .addComponent(jButton1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel1))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(42, 42, 42)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
-                                        .addComponent(jFormattedTextField2, javax.swing.GroupLayout.Alignment.LEADING))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(249, 249, 249)
-                                .addComponent(jLabel7)))
-                        .addGap(0, 286, Short.MAX_VALUE)))
-                .addContainerGap())
+            .addComponent(jScrollPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(JPButtons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JPCadastroUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(424, 424, 424)
+                    .addComponent(LBId)
+                    .addContainerGap(425, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jLabel7)
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(JPCadastroUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(JPButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
-                .addComponent(jButton1)
-                .addContainerGap())
+                .addContainerGap(47, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(292, 292, 292)
+                    .addComponent(LBId)
+                    .addContainerGap(293, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void TxtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_TxtNomeActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void TxtEndereçoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtEndereçoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_TxtEndereçoActionPerformed
+
+    private void BtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalvarActionPerformed
+        // TODO add your handling code here:
+        String nome = TxtNome.getText();
+        String cpf = JFCpf.getText();
+        String email = TxtEmail.getText();
+        String endereço = TxtEndereço.getText();
+        String dataNascimento = JFDataNas.getText();
+
+        UsuarioController novoCadastro = new UsuarioController();
+
+        novoCadastro.CadastroUsuarioController(nome, cpf, email, endereço, dataNascimento);
+
+        TxtNome.setText("");
+        TxtEmail.setText("");
+        TxtEndereço.setText("");
+        JFCpf.setText("");
+        JFDataNas.setText("");
+
+        listarUsuariosView();
+    }//GEN-LAST:event_BtnSalvarActionPerformed
+
+    private void JTUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTUsuarioKeyPressed
+        // TODO add your handling code here:
+
+        String id = JTUsuario.getModel().getValueAt(JTUsuario.getSelectedRow(), 2).toString();
+
+    }//GEN-LAST:event_JTUsuarioKeyPressed
+
+    private void JTUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTUsuarioKeyReleased
+        // TODO add your handling code here:
+        String id = JTUsuario.getModel().getValueAt(JTUsuario.getSelectedRow(), 2).toString();
+
+    }//GEN-LAST:event_JTUsuarioKeyReleased
+
+    private void TxtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtPesquisaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtPesquisaActionPerformed
+
+    private void BtnPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPesquisaActionPerformed
+        // TODO add your handling code here:
+        String pesquisa = TxtPesquisa.getText();
+        filtrarUsuarios(pesquisa);
+    }//GEN-LAST:event_BtnPesquisaActionPerformed
+
+    private void BtnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDeletarActionPerformed
+        // TODO add your handling code here:
+        String idAuxiliar = LBId.getText();
+        String nome = TxtNome.getText();
+        String cpf = JFCpf.getText();
+        String email = TxtEmail.getText();
+        String endereço = TxtEndereço.getText();
+        String dataNascimento = JFDataNas.getText();
+
+        Integer id = Integer.valueOf(idAuxiliar);
+
+        UsuarioController excluirUsuario = new UsuarioController();
+        excluirUsuario.excluirUsuarioController(id);
+        listarUsuariosView();
+
+        TxtNome.setText("");
+        TxtEmail.setText("");
+        TxtEndereço.setText("");
+        JFCpf.setText("");
+        JFDataNas.setText("");
+    }//GEN-LAST:event_BtnDeletarActionPerformed
+
+    private void BtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAlterarActionPerformed
+        // TODO add your handling code here:
+        preencheDados();
+
+
+    }//GEN-LAST:event_BtnAlterarActionPerformed
+
+    private void JTUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTUsuarioMouseClicked
+        // TODO add your handling code here:
+
+        CapturaDados();
+
+    }//GEN-LAST:event_JTUsuarioMouseClicked
+
+    private void BtnConfirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmaActionPerformed
+        // TODO add your handling code here:
+        String idAux = LBId.getText();
+        String nome = TxtNome.getText();
+        String cpf = JFCpf.getText();
+        String email = TxtEmail.getText();
+        String endereço = TxtEndereço.getText();
+        String dataNascimento = JFDataNas.getText();
+        
+        UsuarioController AlterarUsuario = new UsuarioController();
+        AlterarUsuario.alterarUsuarioController(idAux, nome, cpf, email, endereço, dataNascimento);
+        BtnSalvar.setEnabled(true);
+        listarUsuariosView();
+    }//GEN-LAST:event_BtnConfirmaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -251,22 +469,127 @@ public class CadastroUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JButton BtnAlterar;
+    private javax.swing.JButton BtnConfirma;
+    private javax.swing.JButton BtnDeletar;
+    private javax.swing.JButton BtnPesquisa;
+    private javax.swing.JButton BtnSalvar;
+    private javax.swing.JFormattedTextField JFCpf;
+    private javax.swing.JFormattedTextField JFDataNas;
+    private javax.swing.JLabel JLCpf;
+    private javax.swing.JLabel JLEmail;
+    private javax.swing.JLabel JLEndereço;
+    private javax.swing.JLabel JLNascimento;
+    private javax.swing.JLabel JLNome;
+    private javax.swing.JLabel JLPesquisa;
+    private javax.swing.JLabel JLTitulo;
+    private javax.swing.JPanel JPButtons;
+    private javax.swing.JPanel JPCadastroUsuario;
+    private javax.swing.JTable JTUsuario;
+    private javax.swing.JLabel LBId;
+    private javax.swing.JTextField TxtEmail;
+    private javax.swing.JTextField TxtEndereço;
+    private javax.swing.JTextField TxtNome;
+    private javax.swing.JTextField TxtPesquisa;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
+
+    private void listarUsuariosView() {
+
+        try {
+
+            DefaultTableModel dtm = (DefaultTableModel) JTUsuario.getModel();
+            dtm.setRowCount(0);
+            UsuarioController usuarioController = new UsuarioController();
+            ArrayList<UsuarioModel> listarUsuarios = usuarioController.listarUsuariosController();
+
+            Iterator<UsuarioModel> iterator = listarUsuarios.iterator();
+
+            while (iterator.hasNext()) {
+                UsuarioModel usuarios = iterator.next();
+                dtm.addRow(new Object[]{
+                    usuarios.getCodigo(),
+                    usuarios.getNome(),
+                    usuarios.getCpf(),
+                    usuarios.getEmail(),
+                    usuarios.getEndereço(),
+                    usuarios.getDataNascimento(),});
+            }
+
+        } catch (Exception e) {
+        }
+    }
+
+    private void filtrarUsuarios(String nome) {
+
+        DefaultTableModel dtm = (DefaultTableModel) JTUsuario.getModel();
+        dtm.setRowCount(0);
+        UsuarioController usuarioController = new UsuarioController();
+        ArrayList<UsuarioModel> listarUsuarios = usuarioController.buscarUsuarioController(nome);
+
+        Iterator<UsuarioModel> iterator = listarUsuarios.iterator();
+        while (iterator.hasNext()) {
+            UsuarioModel usuarios = iterator.next();
+            dtm.addRow(new Object[]{
+                usuarios.getCodigo(),
+                usuarios.getNome(),
+                usuarios.getCpf(),
+                usuarios.getEmail(),
+                usuarios.getEndereço(),
+                usuarios.getDataNascimento()});
+        }
+
+    }
+
+    private void CapturaDados() {
+        String nome = JTUsuario.getModel().
+                getValueAt(JTUsuario.getSelectedRow(), 1)
+                .toString();
+        String cpf = JTUsuario.getModel().
+                getValueAt(JTUsuario.getSelectedRow(), 2)
+                .toString();
+        String email = JTUsuario.getModel().
+                getValueAt(JTUsuario.getSelectedRow(), 3)
+                .toString();
+        String endereço = JTUsuario.getModel().
+                getValueAt(JTUsuario.getSelectedRow(), 4)
+                .toString();
+        String dataNascimento = JTUsuario.getModel().
+                getValueAt(JTUsuario.getSelectedRow(), 5)
+                .toString();
+        String idAux = JTUsuario.getModel().
+                getValueAt(JTUsuario.getSelectedRow(), 0)
+                .toString();
+    }
+
+    private void preencheDados() {
+         String nome = JTUsuario.getModel().
+                getValueAt(JTUsuario.getSelectedRow(), 1)
+                .toString();
+        String cpf = JTUsuario.getModel().
+                getValueAt(JTUsuario.getSelectedRow(), 2)
+                .toString();
+        String email = JTUsuario.getModel().
+                getValueAt(JTUsuario.getSelectedRow(), 3)
+                .toString();
+        String endereço = JTUsuario.getModel().
+                getValueAt(JTUsuario.getSelectedRow(), 4)
+                .toString();
+        String dataNascimento = JTUsuario.getModel().
+                getValueAt(JTUsuario.getSelectedRow(), 5)
+                .toString();
+        String idAux = JTUsuario.getModel().
+                getValueAt(JTUsuario.getSelectedRow(), 0)
+                .toString();
+        
+        TxtNome.setText(nome);
+        JFCpf.setText(cpf);
+        TxtEmail.setText(email);
+        TxtEndereço.setText(endereço);
+        JFDataNas.setText(dataNascimento);
+        LBId.setText(idAux);
+        
+        BtnSalvar.setEnabled(false);
+
+    }
 }

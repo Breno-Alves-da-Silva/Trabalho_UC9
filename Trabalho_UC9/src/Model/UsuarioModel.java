@@ -1,22 +1,21 @@
-
 package Model;
 
 import DAO.ContatoBD;
 import java.util.ArrayList;
 
+public class UsuarioModel {
 
-public class ClienteModel {
-    private Integer codigo;
+    private int codigo;
     private String nome;
     private String cpf;
     private String email;
     private String endereço;
     private String dataNascimento;
 
-    public ClienteModel() {
+    public UsuarioModel() {
     }
 
-    public ClienteModel(String nome, String cpf, String email, String endereço, String dataNascimento) {
+    public UsuarioModel(String nome, String cpf, String email, String endereço, String dataNascimento) {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
@@ -24,7 +23,7 @@ public class ClienteModel {
         this.dataNascimento = dataNascimento;
     }
 
-    public ClienteModel(Integer codigo, String nome, String cpf, String email, String endereço, String dataNascimento) {
+    public UsuarioModel(int codigo, String nome, String cpf, String email, String endereço, String dataNascimento) {
         this.codigo = codigo;
         this.nome = nome;
         this.cpf = cpf;
@@ -80,18 +79,28 @@ public class ClienteModel {
     public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
-     
-    public void cadastrarClienteDAO(ClienteModel novoCliente) {
-        ContatoBD novoRegistro = new ContatoBD();
-        novoRegistro.CadastrarUsuarioBD(novoCliente); }
 
-    public void excluirCliente(int id) {
-     new ContatoBD().deletClienteBD(id);
+    public void cadastrarUsuarioModel(UsuarioModel novoUsuario) {
+        ContatoBD novoRegistro = new ContatoBD();
+        novoRegistro.CadastrarUsuarioBD(novoUsuario);
     }
 
-   
+    public ArrayList<UsuarioModel> listarUsuariosModel() {
+        return new ContatoBD().listarUsuarios();
+    }
 
+    public ArrayList<UsuarioModel> buscarUsuarioModel(String nome) {
+        return new ContatoBD().buscarUsuario(nome);
+    }
 
-    
-    
+    public void alterarUsuarioModel(UsuarioModel usuarioAjuste) {
+        ContatoBD ajusteDados = new ContatoBD();
+          ajusteDados.alterarUsuarioBD(usuarioAjuste);
+    }
+
+    public void deleteUsuarioModel(Integer codigo) {
+        ContatoBD deleteUsuario = new ContatoBD();
+        deleteUsuario.deleteUsuarioBD(codigo);
+    }
+
 }

@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Java/Trabalho_UC9/Trabalho_UC9/src/View/CadastroUsuario.java</file>
             <file>file:/C:/Java/Trabalho_UC9/Trabalho_UC9/src/DAO/ContatoBD.java</file>
             <file>file:/C:/Java/Trabalho_UC9/Trabalho_UC9/src/Controller/UsuarioController.java</file>
-            <file>file:/C:/Java/Trabalho_UC9/Trabalho_UC9/src/Model/ClienteModel.java</file>
+            <file>file:/C:/Java/Trabalho_UC9/Trabalho_UC9/src/Model/UsuarioModel.java</file>
         </group>
     </open-files>
 </project-private>

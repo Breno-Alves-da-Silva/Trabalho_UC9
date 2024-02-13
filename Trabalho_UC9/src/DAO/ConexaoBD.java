@@ -11,7 +11,7 @@ public class ConexaoBD {
     
         Connection conn = null;
         String className = "org.apache.derby.jdbc.ClientDriver";
-        String url = "jdbc:derby://localhost:1527/agendaServiços"; // Aqui conectamos ao schema!
+        String url = "jdbc:derby://localhost:1527/Biblioteca"; // Aqui conectamos ao schema!
         String user = "root";
         String password = "123";
         
