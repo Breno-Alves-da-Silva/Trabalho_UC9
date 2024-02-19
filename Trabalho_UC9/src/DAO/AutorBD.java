@@ -1,26 +1,23 @@
 package DAO;
 
-import Model.UsuarioModel;
+import Model.AutorModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class ContatoBD {
-
-    public void CadastrarUsuarioBD(UsuarioModel novoUsuario) {
-        String sql = "INSERT INTO USUARIO (NOME, CPF, EMAIL, ENDERECO,DATANASCIMENTO)"
-                + "VALUES(?,?,?,?,?)";
+public class AutorBD {
+    
+    public void CadastrarAutorBD(AutorModel novoAutor) {
+        String sql = "INSERT INTO AUTOR (NOME, NACIONALIDADE)"
+                + "VALUES(?,?)";
         PreparedStatement stmt = null;
         Connection connection = null;
         try {
             connection = new ConexaoBD().getConnection();
             stmt = connection.prepareStatement(sql);
-            stmt.setString(1, novoUsuario.getNome());
-            stmt.setString(2, novoUsuario.getCpf());
-            stmt.setString(3, novoUsuario.getEmail());
-            stmt.setString(4, novoUsuario.getEndereço());
-            stmt.setString(5, novoUsuario.getDataNascimento());
+            stmt.setString(1, novoAutor.getNome());
+            stmt.setString(2, novoAutor.getNacionalidade());
             stmt.execute();
             System.out.println("Registro realizado com sucesso!");
         } catch (Exception e) {
@@ -46,35 +43,30 @@ public class ContatoBD {
             }
         }
     }
-    public void deleteUsuarioBD(int id) {
-    }
 
-    public ArrayList<UsuarioModel> listarUsuarios() {
+    public ArrayList<AutorModel> listarAutor() {
     
         ResultSet rs = null;
         Connection conn = null;
         PreparedStatement stmt = null;
         
-        UsuarioModel usuarios = null;
-        ArrayList<UsuarioModel> listaUsuarios = null;
+        AutorModel autor = null;
+        ArrayList<AutorModel> listaAutor = null;
         
-        String sql = "SELECT * FROM ROOT.USUARIO";
+        String sql = "SELECT * FROM ROOT.AUTOR";
         
         try {
             conn = new ConexaoBD().getConnection();
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
             if (rs != null) {
-                listaUsuarios = new ArrayList<>();
+                listaAutor = new ArrayList<>();
                 while (rs.next()) {
-                    usuarios = new UsuarioModel();
-                    usuarios.setCodigo(rs.getInt("CODIGO"));
-                    usuarios.setNome(rs.getString("NOME"));
-                    usuarios.setCpf(rs.getString("CPF"));
-                    usuarios.setEmail(rs.getString("EMAIL"));
-                    usuarios.setEndereço(rs.getString("ENDERECO"));
-                    usuarios.setDataNascimento(rs.getString("DATANASCIMENTO"));
-                    listaUsuarios.add(usuarios);
+                    autor = new AutorModel();
+                    autor.setCodigo(rs.getInt("CODIGO"));
+                    autor.setNome(rs.getString("NOME"));
+                    autor.setNacionalidade(rs.getString("NACIONALIDADE"));
+                    listaAutor.add(autor);
                 }
             }
         }catch (Exception e) {
@@ -99,18 +91,18 @@ public class ContatoBD {
                 e.printStackTrace();
             }
         }
-        return listaUsuarios;
+        return listaAutor;
     }
-    public ArrayList<UsuarioModel> buscarUsuario(String nome){
+    public ArrayList<AutorModel> buscarAutor(String nome){
     
         ResultSet rs = null;
         Connection conn = null;
         PreparedStatement stmt = null;
         
-        UsuarioModel usuarios = null;
-        ArrayList<UsuarioModel> listaUsuarios = null;
+        AutorModel autor = null;
+        ArrayList<AutorModel> listaAutor = null;
         
-        String sql = "SELECT * FROM ROOT.USUARIO WHERE nome LIKE '%" + 
+        String sql = "SELECT * FROM ROOT.AUTOR WHERE nome LIKE '%" + 
                 nome + "%' ORDER BY nome";
         
         try {
@@ -118,16 +110,13 @@ public class ContatoBD {
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
             if (rs != null) {
-                listaUsuarios = new ArrayList<>();
+                listaAutor = new ArrayList<>();
                 while (rs.next()) {
-                     usuarios = new UsuarioModel();
-                    usuarios.setCodigo(rs.getInt("CODIGO"));
-                    usuarios.setNome(rs.getString("NOME"));
-                    usuarios.setCpf(rs.getString("CPF"));
-                    usuarios.setEmail(rs.getString("EMAIL"));
-                    usuarios.setEndereço(rs.getString("ENDERECO"));
-                    usuarios.setDataNascimento(rs.getString("DATANASCIMENTO"));
-                    listaUsuarios.add(usuarios);
+                  autor = new AutorModel();
+                    autor.setCodigo(rs.getInt("CODIGO"));
+                    autor.setNome(rs.getString("NOME"));
+                    autor.setNacionalidade(rs.getString("NACIONALIDADE"));
+                    listaAutor.add(autor);
                 }
             }
         }catch (Exception e) {
@@ -152,25 +141,23 @@ public class ContatoBD {
                 e.printStackTrace();
             }
         }
-        return listaUsuarios;
+        return listaAutor;
     }
 
-    public void alterarUsuarioBD(UsuarioModel usuarioAjuste) {
+    public void alterarAutorBD(AutorModel autorAjuste) {
     
         Connection conn = null;
         PreparedStatement stmt = null;
         
-        String sql = "UPDATE ROOT.USUARIO SET nome=?, cpf=?, email=?, endereco=?, datanascimento=? where codigo=?";
+        String sql = "UPDATE ROOT.USUARIO SET nome=?, nacionalidade=? where codigo=?";
         
         try {
             conn = new ConexaoBD().getConnection();
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, usuarioAjuste.getNome());
-            stmt.setString(2, usuarioAjuste.getCpf());
-            stmt.setString(3, usuarioAjuste.getEmail());
-            stmt.setString(4, usuarioAjuste.getEndereço());
-            stmt.setString(5, usuarioAjuste.getDataNascimento());
-            stmt.setInt(4,usuarioAjuste.getCodigo());            stmt.execute();
+            stmt.setString(1, autorAjuste.getNome());
+            stmt.setString(2, autorAjuste.getNacionalidade());
+            stmt.setInt(6, autorAjuste.getCodigo());
+            stmt.execute();
             System.out.println("Alteração do registro realizada com sucesso!");
         } catch (Exception e) {
             System.out.println("Erro ao realizar a alteração no registro!");
@@ -196,12 +183,12 @@ public class ContatoBD {
         }}
     
     
-    public void deleteUsuarioBD(Integer codigo){
+    public void deleteAutorBD(Integer codigo){
     
         Connection conn = null;
         PreparedStatement stmt = null;
         
-        String sql = "DELETE FROM ROOT.USUARIO where codigo=?";
+        String sql = "DELETE FROM ROOT.AUTOR where codigo=?";
         
         try {
             conn = new ConexaoBD().getConnection();
@@ -233,6 +220,4 @@ public class ContatoBD {
         }
         
     }
-
-
 }

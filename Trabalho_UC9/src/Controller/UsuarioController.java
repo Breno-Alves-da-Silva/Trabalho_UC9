@@ -35,18 +35,18 @@ public class UsuarioController {
         UsuarioModel usuarios = new UsuarioModel();
         return usuarios.listarUsuariosModel();
     }
-    
+
     public ArrayList<UsuarioModel> buscarUsuarioController(String nome) {
         UsuarioModel usuario = new UsuarioModel();
         return usuario.buscarUsuarioModel(nome);
     }
 
-    public void alterarUsuarioController(String codigo, String nome, String cpf, String email, String endereco, String dataNascimento ) {
+    public void alterarUsuarioController(String codigo, String nome, String cpf, String email, String endereco, String dataNascimento) {
 
         if ((codigo != null && codigo.length() > 0)
-                &&(nome != null && nome.length() > 0)
-                &&(cpf != null && cpf.length() > 0)
-                &&(endereco != null && endereco.length() > 0)
+                && (nome != null && nome.length() > 0)
+                && (cpf != null && cpf.length() > 0)
+                && (endereco != null && endereco.length() > 0)
                 && (dataNascimento != null && dataNascimento.length() > 0)
                 && (email != null && email.length() > 0)) {
             int idNumerico = Integer.parseInt(codigo);

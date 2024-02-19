@@ -1,6 +1,6 @@
 package Model;
 
-import DAO.ContatoBD;
+import DAO.UsuarioBD;
 import java.util.ArrayList;
 
 public class UsuarioModel {
@@ -81,26 +81,25 @@ public class UsuarioModel {
     }
 
     public void cadastrarUsuarioModel(UsuarioModel novoUsuario) {
-        ContatoBD novoRegistro = new ContatoBD();
+        UsuarioBD novoRegistro = new UsuarioBD();
         novoRegistro.CadastrarUsuarioBD(novoUsuario);
     }
 
     public ArrayList<UsuarioModel> listarUsuariosModel() {
-        return new ContatoBD().listarUsuarios();
+        return new UsuarioBD().listarUsuarios();
     }
 
     public ArrayList<UsuarioModel> buscarUsuarioModel(String nome) {
-        return new ContatoBD().buscarUsuario(nome);
+        return new UsuarioBD().buscarUsuario(nome);
     }
 
     public void alterarUsuarioModel(UsuarioModel usuarioAjuste) {
-        ContatoBD ajusteDados = new ContatoBD();
+        UsuarioBD ajusteDados = new UsuarioBD();
           ajusteDados.alterarUsuarioBD(usuarioAjuste);
     }
 
     public void deleteUsuarioModel(Integer codigo) {
-        ContatoBD deleteUsuario = new ContatoBD();
-        deleteUsuario.deleteUsuarioBD(codigo);
+        new UsuarioBD().deleteUsuarioBD(codigo);
     }
 
 }
