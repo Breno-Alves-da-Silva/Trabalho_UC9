@@ -21,6 +21,7 @@ public class CadastroLivro extends javax.swing.JFrame {
      */
     public CadastroLivro() {
         initComponents();
+        listarLivrosView();
     }
 
     /**
@@ -81,6 +82,19 @@ public class CadastroLivro extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        JTLivros.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JTLivrosMouseClicked(evt);
+            }
+        });
+        JTLivros.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JTLivrosKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JTLivrosKeyReleased(evt);
             }
         });
         jScrollPane3.setViewportView(JTLivros);
@@ -317,6 +331,7 @@ public class CadastroLivro extends javax.swing.JFrame {
         TxtGenero.setText("");
 
         BtnSalvar.setEnabled(true);
+        listarLivrosView();
     }//GEN-LAST:event_BtnDeletarActionPerformed
 
     private void BtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAlterarActionPerformed
@@ -331,8 +346,7 @@ public class CadastroLivro extends javax.swing.JFrame {
         String genero = TxtGenero.getText();
         String numeroPaginasT = TxtNumeroPaginas.getText();
         String resumo = JTAResumo.getText();
-        
-        
+
         Integer numeroPaginas = Integer.parseInt(numeroPaginasT);
 
         LivrosController novoCadastro = new LivrosController();
@@ -364,7 +378,7 @@ public class CadastroLivro extends javax.swing.JFrame {
         String genero = TxtGenero.getText();
         String numeroPaginasT = TxtNumeroPaginas.getText();
         String resumo = JTAResumo.getText();
-        
+
         Integer numeroPaginas = Integer.parseInt(numeroPaginasT);
 
         LivrosController AlterarLivros = new LivrosController();
@@ -372,6 +386,23 @@ public class CadastroLivro extends javax.swing.JFrame {
         BtnSalvar.setEnabled(true);
         listarLivrosView();
     }//GEN-LAST:event_BtnConfirmaActionPerformed
+
+    private void JTLivrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTLivrosMouseClicked
+        // TODO add your handling code here:
+        CapturaDados();
+    }//GEN-LAST:event_JTLivrosMouseClicked
+
+    private void JTLivrosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTLivrosKeyPressed
+        // TODO add your handling code here:
+        String id = JTLivros.getModel().getValueAt(JTLivros.getSelectedRow(), 0).toString();
+
+    }//GEN-LAST:event_JTLivrosKeyPressed
+
+    private void JTLivrosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTLivrosKeyReleased
+        // TODO add your handling code here:
+        String id = JTLivros.getModel().getValueAt(JTLivros.getSelectedRow(), 0).toString();
+
+    }//GEN-LAST:event_JTLivrosKeyReleased
 
     /**
      * @param args the command line arguments
@@ -441,7 +472,7 @@ public class CadastroLivro extends javax.swing.JFrame {
 
         Iterator<LivrosModel> iterator = listarLivros.iterator();
 
-         while (iterator.hasNext()) {
+        while (iterator.hasNext()) {
             LivrosModel livros = iterator.next();
             dtm.addRow(new Object[]{
                 livros.getCodigo(),
@@ -494,5 +525,23 @@ public class CadastroLivro extends javax.swing.JFrame {
         JLId.setText(idAux);
 
         BtnSalvar.setEnabled(false);
+    }
+
+    private void CapturaDados() {
+        String titulo= JTLivros.getModel().
+                getValueAt(JTLivros.getSelectedRow(), 1)
+                .toString();
+        String genero = JTLivros.getModel().
+                getValueAt(JTLivros.getSelectedRow(), 2)
+                .toString();
+        String numeroPaginas= JTLivros.getModel().
+                getValueAt(JTLivros.getSelectedRow(), 0)
+                .toString();
+        String resumo = JTLivros.getModel().
+                getValueAt(JTLivros.getSelectedRow(), 0)
+                .toString();
+        String idAux = JTLivros.getModel().
+                getValueAt(JTLivros.getSelectedRow(), 0)
+                .toString();
     }
 }

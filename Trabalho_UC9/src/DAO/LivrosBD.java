@@ -173,6 +173,7 @@ public class LivrosBD {
             stmt.setString(2, livroAjuste.getGenero());
             stmt.setInt(3, livroAjuste.getNumeroPaginas());
             stmt.setString(4, livroAjuste.getResumo());
+             stmt.setInt(5, livroAjuste.getCodigo());
             stmt.execute();
             System.out.println("Alteração do registro realizada com sucesso!");
         } catch (Exception e) {
