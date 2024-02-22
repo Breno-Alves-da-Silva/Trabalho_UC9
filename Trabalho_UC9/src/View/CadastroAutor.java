@@ -21,6 +21,7 @@ public class CadastroAutor extends javax.swing.JFrame {
      */
     public CadastroAutor() {
         initComponents();
+        listarAutorView();
     }
 
     /**
@@ -32,8 +33,6 @@ public class CadastroAutor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        JTAutor = new javax.swing.JTable();
         JPButtons = new javax.swing.JPanel();
         BtnDeletar = new javax.swing.JButton();
         BtnAlterar = new javax.swing.JButton();
@@ -49,41 +48,10 @@ public class CadastroAutor extends javax.swing.JFrame {
         TxtNome = new javax.swing.JTextField();
         TxtNacionalidade = new javax.swing.JTextField();
         JLId = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        JTAutor = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        JTAutor.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "ID", "Nome", "Nacionalidade"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(JTAutor);
-        if (JTAutor.getColumnModel().getColumnCount() > 0) {
-            JTAutor.getColumnModel().getColumn(0).setResizable(false);
-            JTAutor.getColumnModel().getColumn(1).setResizable(false);
-            JTAutor.getColumnModel().getColumn(2).setResizable(false);
-        }
 
         JPButtons.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
 
@@ -218,42 +186,84 @@ public class CadastroAutor extends javax.swing.JFrame {
 
         JLId.setText("jLabel1");
 
+        JTAutor.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nome", "Nacionalidade"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        JTAutor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JTAutorMouseClicked(evt);
+            }
+        });
+        JTAutor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JTAutorKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JTAutorKeyReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(JTAutor);
+        if (JTAutor.getColumnModel().getColumnCount() > 0) {
+            JTAutor.getColumnModel().getColumn(0).setResizable(false);
+            JTAutor.getColumnModel().getColumn(1).setResizable(false);
+            JTAutor.getColumnModel().getColumn(2).setResizable(false);
+        }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(JPButtons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(JPCadastroAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(115, 115, 115))))
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(JPButtons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addContainerGap(22, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(JPCadastroAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(125, 125, 125))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(395, 395, 395)
                     .addComponent(JLId)
-                    .addContainerGap(395, Short.MAX_VALUE)))
+                    .addContainerGap(419, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addContainerGap(73, Short.MAX_VALUE)
                 .addComponent(JPCadastroAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGap(52, 52, 52)
                 .addComponent(JPButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(18, 18, 18))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(255, 255, 255)
                     .addComponent(JLId)
-                    .addContainerGap(256, Short.MAX_VALUE)))
+                    .addContainerGap(331, Short.MAX_VALUE)))
         );
 
         pack();
@@ -280,6 +290,7 @@ public class CadastroAutor extends javax.swing.JFrame {
     private void BtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAlterarActionPerformed
         // TODO add your handling code here:
         preencheDados();
+        listarAutorView();
     }//GEN-LAST:event_BtnAlterarActionPerformed
 
     private void BtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalvarActionPerformed
@@ -305,6 +316,7 @@ public class CadastroAutor extends javax.swing.JFrame {
         // TODO add your handling code here:
         String pesquisa = TxtPesquisa.getText();
         filtrarAutor(pesquisa);
+        listarAutorView();
     }//GEN-LAST:event_BtnPesquisaActionPerformed
 
     private void BtnConfirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmaActionPerformed
@@ -318,6 +330,23 @@ public class CadastroAutor extends javax.swing.JFrame {
         BtnSalvar.setEnabled(true);
         listarAutorView();
     }//GEN-LAST:event_BtnConfirmaActionPerformed
+
+    private void JTAutorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTAutorMouseClicked
+        // TODO add your handling code here:
+          CapturaDados();
+    }//GEN-LAST:event_JTAutorMouseClicked
+
+    private void JTAutorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTAutorKeyPressed
+        // TODO add your handling code here:
+        String id = JTAutor.getModel().getValueAt(JTAutor.getSelectedRow(), 0).toString();
+
+    }//GEN-LAST:event_JTAutorKeyPressed
+
+    private void JTAutorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTAutorKeyReleased
+        // TODO add your handling code here:
+        String id = JTAutor.getModel().getValueAt(JTAutor.getSelectedRow(), 0).toString();
+
+    }//GEN-LAST:event_JTAutorKeyReleased
 
     /**
      * @param args the command line arguments
@@ -395,8 +424,7 @@ public class CadastroAutor extends javax.swing.JFrame {
 
     private void listarAutorView() {
 
-        try {
-
+       
             DefaultTableModel dtm = (DefaultTableModel) JTAutor.getModel();
             dtm.setRowCount(0);
             AutorController autorController = new AutorController();
@@ -412,8 +440,7 @@ public class CadastroAutor extends javax.swing.JFrame {
                     autor.getNacionalidade()});
             }
 
-        } catch (Exception e) {
-        }
+        
     }
 
     private void filtrarAutor(String nome) {
@@ -431,4 +458,17 @@ public class CadastroAutor extends javax.swing.JFrame {
                 autor.getNacionalidade()});
         }
     }
+
+    private void CapturaDados() {
+    
+        String nome = JTAutor.getModel().
+                getValueAt(JTAutor.getSelectedRow(), 1)
+                .toString();
+        String nascimento = JTAutor.getModel().
+                getValueAt(JTAutor.getSelectedRow(), 2)
+                .toString();
+        String idAux = JTAutor.getModel().
+                getValueAt(JTAutor.getSelectedRow(), 0)
+                .toString();
+    } 
 }
