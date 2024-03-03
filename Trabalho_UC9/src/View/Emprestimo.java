@@ -1,20 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package View;
 
-/**
- *
- * @author User
- */
+import Controller.LivrosController;
+import Controller.UsuarioController;
+import Model.LivrosModel;
+import Model.UsuarioModel;
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.swing.table.DefaultTableModel;
+
 public class Emprestimo extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Item
-     */
     public Emprestimo() {
         initComponents();
+        listarLivrosView();
+        listarUsuariosView();
     }
 
     /**
@@ -26,21 +25,357 @@ public class Emprestimo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane3 = new javax.swing.JScrollPane();
+        JTLivros = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        JTUsuario = new javax.swing.JTable();
+        JPEmprestimo = new javax.swing.JPanel();
+        JLIdUsuario = new javax.swing.JLabel();
+        JLIdLivro = new javax.swing.JLabel();
+        TxtIdLivro = new javax.swing.JTextField();
+        TxtIdUsuario = new javax.swing.JTextField();
+        JLTitulo = new javax.swing.JLabel();
+        BtnUsuario = new javax.swing.JButton();
+        BtnLivro = new javax.swing.JButton();
+        BtnAutor = new javax.swing.JButton();
+        BtnConfirmar = new javax.swing.JButton();
+        BtnEmprestimo = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        JTEmprestimo = new javax.swing.JTable();
+        JLIdAuxLivro = new javax.swing.JLabel();
+        JLIdAuxUsuario = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        JTLivros.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Título", "Gênero", "Numero de Paginas", "Resumo", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        JTLivros.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JTLivrosMouseClicked(evt);
+            }
+        });
+        JTLivros.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JTLivrosKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JTLivrosKeyReleased(evt);
+            }
+        });
+        jScrollPane3.setViewportView(JTLivros);
+
+        JTUsuario.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Nome", "CPF", "E-mail", "Endereço", "Data de Nascimento"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        JTUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JTUsuarioMouseClicked(evt);
+            }
+        });
+        JTUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JTUsuarioKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JTUsuarioKeyReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(JTUsuario);
+
+        JPEmprestimo.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+
+        JLIdUsuario.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        JLIdUsuario.setText("ID Usuario");
+
+        JLIdLivro.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        JLIdLivro.setText("ID Livro");
+
+        TxtIdLivro.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+
+        TxtIdUsuario.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        TxtIdUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtIdUsuarioActionPerformed(evt);
+            }
+        });
+
+        JLTitulo.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        JLTitulo.setText("Emprestimo");
+
+        BtnUsuario.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        BtnUsuario.setText("Usuario");
+
+        BtnLivro.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        BtnLivro.setText("Livro");
+
+        BtnAutor.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        BtnAutor.setText("Autor");
+
+        BtnConfirmar.setText("Confirmar");
+        BtnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnConfirmarActionPerformed(evt);
+            }
+        });
+
+        BtnEmprestimo.setText("Dados");
+        BtnEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEmprestimoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout JPEmprestimoLayout = new javax.swing.GroupLayout(JPEmprestimo);
+        JPEmprestimo.setLayout(JPEmprestimoLayout);
+        JPEmprestimoLayout.setHorizontalGroup(
+            JPEmprestimoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPEmprestimoLayout.createSequentialGroup()
+                .addGap(101, 101, 101)
+                .addGroup(JPEmprestimoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JLIdUsuario)
+                    .addComponent(JLIdLivro))
+                .addGap(18, 18, 18)
+                .addGroup(JPEmprestimoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPEmprestimoLayout.createSequentialGroup()
+                        .addComponent(JLTitulo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                        .addComponent(BtnAutor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnLivro)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnUsuario))
+                    .addGroup(JPEmprestimoLayout.createSequentialGroup()
+                        .addGroup(JPEmprestimoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(JPEmprestimoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(TxtIdUsuario)
+                                .addComponent(TxtIdLivro, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(JPEmprestimoLayout.createSequentialGroup()
+                                .addComponent(BtnEmprestimo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(BtnConfirmar)))
+                        .addContainerGap())))
+        );
+        JPEmprestimoLayout.setVerticalGroup(
+            JPEmprestimoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPEmprestimoLayout.createSequentialGroup()
+                .addGroup(JPEmprestimoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(JPEmprestimoLayout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(JLTitulo))
+                    .addGroup(JPEmprestimoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(BtnUsuario)
+                        .addComponent(BtnLivro)
+                        .addComponent(BtnAutor)))
+                .addGap(53, 53, 53)
+                .addGroup(JPEmprestimoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JLIdUsuario)
+                    .addComponent(TxtIdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51)
+                .addGroup(JPEmprestimoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JLIdLivro)
+                    .addComponent(TxtIdLivro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(JPEmprestimoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnConfirmar)
+                    .addComponent(BtnEmprestimo))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        JTEmprestimo.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "ID Usuario", "ID Livro", "Data Locação", "Data Devolução"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(JTEmprestimo);
+        if (JTEmprestimo.getColumnModel().getColumnCount() > 0) {
+            JTEmprestimo.getColumnModel().getColumn(0).setResizable(false);
+            JTEmprestimo.getColumnModel().getColumn(1).setResizable(false);
+            JTEmprestimo.getColumnModel().getColumn(2).setResizable(false);
+            JTEmprestimo.getColumnModel().getColumn(3).setResizable(false);
+            JTEmprestimo.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(113, 113, 113)
+                        .addComponent(JPEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(15, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(379, 379, 379)
+                    .addComponent(JLIdAuxLivro)
+                    .addContainerGap(422, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(380, 380, 380)
+                    .addComponent(JLIdAuxUsuario)
+                    .addContainerGap(421, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(JPEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(311, 311, 311)
+                    .addComponent(JLIdAuxLivro)
+                    .addContainerGap(305, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(300, 300, 300)
+                    .addComponent(JLIdAuxUsuario)
+                    .addContainerGap(316, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void JTLivrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTLivrosMouseClicked
+        // TODO add your handling code here:
+        CapturaDadosLivros();
+        PreencheDadosLivros();
+    }//GEN-LAST:event_JTLivrosMouseClicked
+
+    private void JTLivrosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTLivrosKeyPressed
+        // TODO add your handling code here:
+        String id = JTLivros.getModel().getValueAt(JTLivros.getSelectedRow(), 0).toString();
+    }//GEN-LAST:event_JTLivrosKeyPressed
+
+    private void JTLivrosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTLivrosKeyReleased
+        // TODO add your handling code here:
+        String id = JTLivros.getModel().getValueAt(JTLivros.getSelectedRow(), 0).toString();
+    }//GEN-LAST:event_JTLivrosKeyReleased
+
+    private void JTUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTUsuarioMouseClicked
+        // TODO add your handling code here:
+
+        CapturaDadosUsuario();
+        PreencheDadosUsuarios();
+    }//GEN-LAST:event_JTUsuarioMouseClicked
+
+    private void JTUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTUsuarioKeyPressed
+        // TODO add your handling code here:
+
+        String id = JTUsuario.getModel().getValueAt(JTUsuario.getSelectedRow(), 2).toString();
+    }//GEN-LAST:event_JTUsuarioKeyPressed
+
+    private void JTUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTUsuarioKeyReleased
+        // TODO add your handling code here:
+        String id = JTUsuario.getModel().getValueAt(JTUsuario.getSelectedRow(), 2).toString();
+    }//GEN-LAST:event_JTUsuarioKeyReleased
+
+    private void BtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmarActionPerformed
+        // TODO add your handling code here:
+        String idUsuario = TxtIdUsuario.getText();
+        String idLivro = TxtIdLivro.getText();
+        String status = "Não disponivel";
+
+        LivrosController AlterarStatusLivros = new LivrosController();
+        AlterarStatusLivros.alterarStatusLivrosController(idLivro, status);
+        listarLivrosView();
+
+    }//GEN-LAST:event_BtnConfirmarActionPerformed
+
+    private void TxtIdUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtIdUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtIdUsuarioActionPerformed
+
+    private void BtnEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEmprestimoActionPerformed
+        // TODO add your handling code here:
+        PreencheDadosLivros();
+        PreencheDadosUsuarios();
+    }//GEN-LAST:event_BtnEmprestimoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +414,98 @@ public class Emprestimo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnAutor;
+    private javax.swing.JButton BtnConfirmar;
+    private javax.swing.JButton BtnEmprestimo;
+    private javax.swing.JButton BtnLivro;
+    private javax.swing.JButton BtnUsuario;
+    private javax.swing.JLabel JLIdAuxLivro;
+    private javax.swing.JLabel JLIdAuxUsuario;
+    private javax.swing.JLabel JLIdLivro;
+    private javax.swing.JLabel JLIdUsuario;
+    private javax.swing.JLabel JLTitulo;
+    private javax.swing.JPanel JPEmprestimo;
+    private javax.swing.JTable JTEmprestimo;
+    private javax.swing.JTable JTLivros;
+    private javax.swing.JTable JTUsuario;
+    private javax.swing.JTextField TxtIdLivro;
+    private javax.swing.JTextField TxtIdUsuario;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
+
+    private void CapturaDadosUsuario() {
+        String idAuxUsuario = JTLivros.getModel().
+                getValueAt(JTLivros.getSelectedRow(), 0)
+                .toString();
+    }
+
+    private void CapturaDadosLivros() {
+        String idAuxLivro = JTUsuario.getModel().
+                getValueAt(JTUsuario.getSelectedRow(), 0)
+                .toString();
+    }
+
+    private void listarLivrosView() {
+        DefaultTableModel dtm = (DefaultTableModel) JTLivros.getModel();
+        dtm.setRowCount(0);
+        LivrosController livrosController = new LivrosController();
+        ArrayList<LivrosModel> listarLivros = livrosController.listarLivrosController();
+
+        Iterator<LivrosModel> iterator = listarLivros.iterator();
+
+        while (iterator.hasNext()) {
+            LivrosModel livros = iterator.next();
+            dtm.addRow(new Object[]{
+                livros.getCodigo(),
+                livros.getTitulo(),
+                livros.getGenero(),
+                livros.getNumeroPaginas(),
+                livros.getResumo(),
+                livros.getStatus()});
+        }
+    }
+
+    private void listarUsuariosView() {
+
+        try {
+
+            DefaultTableModel dtm = (DefaultTableModel) JTUsuario.getModel();
+            dtm.setRowCount(0);
+            UsuarioController usuarioController = new UsuarioController();
+            ArrayList<UsuarioModel> listarUsuarios = usuarioController.listarUsuariosController();
+
+            Iterator<UsuarioModel> iterator = listarUsuarios.iterator();
+
+            while (iterator.hasNext()) {
+                UsuarioModel usuarios = iterator.next();
+                dtm.addRow(new Object[]{
+                    usuarios.getCodigo(),
+                    usuarios.getNome(),
+                    usuarios.getCpf(),
+                    usuarios.getEmail(),
+                    usuarios.getEndereço(),
+                    usuarios.getDataNascimento(),});
+            }
+
+        } catch (Exception e) {
+        }
+    }
+
+    private void PreencheDadosUsuarios() {
+        String idAux = JTUsuario.getModel().
+                getValueAt(JTUsuario.getSelectedRow(), 0)
+                .toString();
+
+        TxtIdUsuario.setText(idAux);
+    }
+
+    private void PreencheDadosLivros() {
+        String idAux = JTUsuario.getModel().
+                getValueAt(JTUsuario.getSelectedRow(), 0)
+                .toString();
+
+        TxtIdLivro.setText(idAux);
+    }
 }

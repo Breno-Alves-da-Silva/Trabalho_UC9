@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controller;
 
 import Model.LivrosModel;
@@ -13,13 +9,15 @@ import javax.swing.JOptionPane;
  * @author User
  */
 public class LivrosController {
-     public void CadastroLivrosController(String titulo,String genero,Integer numeroPaginas, String resumo) {
+
+    public void CadastroLivrosController(String titulo, String genero, Integer numeroPaginas, String resumo, String status) {
         if ((titulo != null && titulo.length() > 0)
                 && (genero != null && genero.length() > 0)
-                && (numeroPaginas != null )
-                && (resumo != null && resumo.length() > 0)) {
+                && (numeroPaginas != null)
+                && (resumo != null && resumo.length() > 0)
+                && (status != null && status.length() > 0)) {
 
-            LivrosModel novoLivros = new LivrosModel(titulo, genero, numeroPaginas, resumo) {
+            LivrosModel novoLivros = new LivrosModel(titulo, genero, numeroPaginas, resumo, status) {
             };
             novoLivros.cadastrarLivrosModel(novoLivros);
 
@@ -30,7 +28,7 @@ public class LivrosController {
     }
 
     public ArrayList<LivrosModel> listarLivrosController() {
-       LivrosModel livros = new LivrosModel();
+        LivrosModel livros = new LivrosModel();
         return livros.listarLivrosModel();
     }
 
@@ -39,22 +37,32 @@ public class LivrosController {
         return livros.buscarLivrosModel(nome);
     }
 
-    public void alterarLivrosController(String codigo,String titulo,String genero,Integer numeroPaginas,String resumo) {
+    public void alterarStatusLivrosController(String codigo, String status) {
+        if (status != null && status.length() > 0) {
+            int idNumerico = Integer.parseInt(codigo);
+
+            LivrosModel statusLivrosAjuste = new LivrosModel(idNumerico, status);
+            statusLivrosAjuste.alterarStatusLivrosModel(statusLivrosAjuste);
+        }
+
+    }
+
+    public void alterarLivrosController(String codigo, String titulo, String genero, Integer numeroPaginas, String resumo) {
 
         if ((titulo != null && titulo.length() > 0)
                 && (genero != null && genero.length() > 0)
                 && (numeroPaginas != null)
-                && (resumo != null && resumo.length() > 0))
-                {
+                && (resumo != null && resumo.length() > 0)) {
             int idNumerico = Integer.parseInt(codigo);
 
             LivrosModel livrosAjuste = new LivrosModel(idNumerico, titulo, genero, numeroPaginas, resumo);
             livrosAjuste.alterarLivrosModel(livrosAjuste);
         }
     }
-
-    public void excluirLivrosController(int codigo) {
+        public void excluirLivrosController(int codigo) {
         LivrosModel codLivros = new LivrosModel();
         codLivros.deleteLivrosModel(codigo);
     }
+
+
 }

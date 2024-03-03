@@ -55,25 +55,28 @@ public class CadastroLivro extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         JTAResumo = new javax.swing.JTextArea();
         JLCadastroLivro = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         JTLivros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Título", "Gênero", "Numero de Paginas", "Resumo"
+                "ID", "Título", "Gênero", "Numero de Paginas", "Resumo", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -187,8 +190,6 @@ public class CadastroLivro extends javax.swing.JFrame {
                 .addGap(14, 14, 14))
         );
 
-        JLId.setText("jLabel1");
-
         JPCadastroLivro.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
 
         JLTitulo.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
@@ -217,37 +218,56 @@ public class CadastroLivro extends javax.swing.JFrame {
         JLCadastroLivro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         JLCadastroLivro.setText("Cadastro Do Livro");
 
+        jButton1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jButton1.setText("Livro");
+
+        jButton2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jButton2.setText("Emprestimo ");
+
+        jButton3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jButton3.setText("Autor");
+
         javax.swing.GroupLayout JPCadastroLivroLayout = new javax.swing.GroupLayout(JPCadastroLivro);
         JPCadastroLivro.setLayout(JPCadastroLivroLayout);
         JPCadastroLivroLayout.setHorizontalGroup(
             JPCadastroLivroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPCadastroLivroLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(JPCadastroLivroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(JPCadastroLivroLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(JPCadastroLivroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JLTitulo)
-                            .addComponent(JLNumeroPaginas)
-                            .addComponent(JLGenero))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(JPCadastroLivroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(TxtNumeroPaginas)
-                            .addComponent(TxtTituloLivro)
-                            .addComponent(TxtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(47, 47, 47)
-                        .addGroup(JPCadastroLivroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JLResumo)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(JPCadastroLivroLayout.createSequentialGroup()
-                        .addGap(310, 310, 310)
-                        .addComponent(JLCadastroLivro)))
-                .addContainerGap())
+                    .addComponent(JLTitulo)
+                    .addComponent(JLNumeroPaginas)
+                    .addComponent(JLGenero))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(JPCadastroLivroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(TxtNumeroPaginas)
+                    .addComponent(TxtTituloLivro)
+                    .addComponent(TxtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(47, 47, 47)
+                .addGroup(JPCadastroLivroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JLResumo)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(JPCadastroLivroLayout.createSequentialGroup()
+                .addGap(310, 310, 310)
+                .addComponent(JLCadastroLivro)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2))
         );
         JPCadastroLivroLayout.setVerticalGroup(
             JPCadastroLivroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPCadastroLivroLayout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addComponent(JLCadastroLivro)
+                .addGroup(JPCadastroLivroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(JPCadastroLivroLayout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(JLCadastroLivro))
+                    .addGroup(JPCadastroLivroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton2)
+                        .addComponent(jButton1)
+                        .addComponent(jButton3)))
                 .addGap(44, 44, 44)
                 .addGroup(JPCadastroLivroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JLTitulo)
@@ -288,12 +308,12 @@ public class CadastroLivro extends javax.swing.JFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(418, 418, 418)
                     .addComponent(JLId)
-                    .addContainerGap(418, Short.MAX_VALUE)))
+                    .addContainerGap(459, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(16, 16, 16)
                 .addComponent(JPCadastroLivro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(JPButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -304,7 +324,7 @@ public class CadastroLivro extends javax.swing.JFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(293, 293, 293)
                     .addComponent(JLId)
-                    .addContainerGap(294, Short.MAX_VALUE)))
+                    .addContainerGap(310, Short.MAX_VALUE)))
         );
 
         pack();
@@ -346,12 +366,13 @@ public class CadastroLivro extends javax.swing.JFrame {
         String genero = TxtGenero.getText();
         String numeroPaginasT = TxtNumeroPaginas.getText();
         String resumo = JTAResumo.getText();
+         String status = "Disponivel";
 
         Integer numeroPaginas = Integer.parseInt(numeroPaginasT);
 
         LivrosController novoCadastro = new LivrosController();
 
-        novoCadastro.CadastroLivrosController(titulo, genero, numeroPaginas, resumo);
+        novoCadastro.CadastroLivrosController(titulo, genero, numeroPaginas, resumo, status);
 
         JTAResumo.setText("");
         TxtTituloLivro.setText("");
@@ -378,6 +399,7 @@ public class CadastroLivro extends javax.swing.JFrame {
         String genero = TxtGenero.getText();
         String numeroPaginasT = TxtNumeroPaginas.getText();
         String resumo = JTAResumo.getText();
+       
 
         Integer numeroPaginas = Integer.parseInt(numeroPaginasT);
 
@@ -460,6 +482,9 @@ public class CadastroLivro extends javax.swing.JFrame {
     private javax.swing.JTextField TxtNumeroPaginas;
     private javax.swing.JTextField TxtPesquisa;
     private javax.swing.JTextField TxtTituloLivro;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
@@ -479,7 +504,8 @@ public class CadastroLivro extends javax.swing.JFrame {
                 livros.getTitulo(),
                 livros.getGenero(),
                 livros.getNumeroPaginas(),
-                livros.getResumo()});
+                livros.getResumo(),
+                livros.getStatus()});
         }
     }
 
@@ -497,7 +523,8 @@ public class CadastroLivro extends javax.swing.JFrame {
                 livros.getTitulo(),
                 livros.getGenero(),
                 livros.getNumeroPaginas(),
-                livros.getResumo()});
+                livros.getResumo(),
+                livros.getStatus()});
         }
     }
 
@@ -514,6 +541,9 @@ public class CadastroLivro extends javax.swing.JFrame {
         String resumo = JTLivros.getModel().
                 getValueAt(JTLivros.getSelectedRow(), 4)
                 .toString();
+        String status = JTLivros.getModel().
+                getValueAt(JTLivros.getSelectedRow(), 5)
+                .toString();
         String idAux = JTLivros.getModel().
                 getValueAt(JTLivros.getSelectedRow(), 0)
                 .toString();
@@ -523,6 +553,7 @@ public class CadastroLivro extends javax.swing.JFrame {
         TxtNumeroPaginas.setText(numeroPaginas);
         JTAResumo.setText(resumo);
         JLId.setText(idAux);
+        
 
         BtnSalvar.setEnabled(false);
     }
@@ -535,10 +566,13 @@ public class CadastroLivro extends javax.swing.JFrame {
                 getValueAt(JTLivros.getSelectedRow(), 2)
                 .toString();
         String numeroPaginas= JTLivros.getModel().
-                getValueAt(JTLivros.getSelectedRow(), 0)
+                getValueAt(JTLivros.getSelectedRow(), 3)
                 .toString();
         String resumo = JTLivros.getModel().
-                getValueAt(JTLivros.getSelectedRow(), 0)
+                getValueAt(JTLivros.getSelectedRow(), 4)
+                .toString();
+        String status = JTLivros.getModel().
+                getValueAt(JTLivros.getSelectedRow(), 5)
                 .toString();
         String idAux = JTLivros.getModel().
                 getValueAt(JTLivros.getSelectedRow(), 0)

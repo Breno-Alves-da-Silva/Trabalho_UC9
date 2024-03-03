@@ -3,22 +3,24 @@ package Model;
 import DAO.LivrosBD;
 import java.util.ArrayList;
 
-
 public class LivrosModel {
+
     private Integer codigo;
     private String titulo;
     private String genero;
     private Integer numeroPaginas;
     private String resumo;
+    private String status;
 
     public LivrosModel() {
     }
 
-    public LivrosModel(String titulo, String genero, Integer numeroPaginas, String resumo) {
+    public LivrosModel(String titulo, String genero, Integer numeroPaginas, String resumo, String status) {
         this.titulo = titulo;
         this.genero = genero;
         this.numeroPaginas = numeroPaginas;
         this.resumo = resumo;
+        this.status = status;
     }
 
     public LivrosModel(Integer codigo, String titulo, String genero, Integer numeroPaginas, String resumo) {
@@ -27,6 +29,20 @@ public class LivrosModel {
         this.genero = genero;
         this.numeroPaginas = numeroPaginas;
         this.resumo = resumo;
+    }
+
+    public LivrosModel(Integer codigo, String status) {
+        this.codigo = codigo;
+        this.status = status;
+    }
+    
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Integer getCodigo() {
@@ -68,9 +84,9 @@ public class LivrosModel {
     public void setResumo(String resumo) {
         this.resumo = resumo;
     }
-    
+
     public void cadastrarLivrosModel(LivrosModel novoLivros) {
-       LivrosBD novoRegistro = new LivrosBD();
+        LivrosBD novoRegistro = new LivrosBD();
         novoRegistro.CadastrarLivrosBD(novoLivros);
     }
 
@@ -84,10 +100,15 @@ public class LivrosModel {
 
     public void alterarLivrosModel(LivrosModel livrosAjuste) {
         LivrosBD ajusteDados = new LivrosBD();
-          ajusteDados.alterarLivrosBD(livrosAjuste);
+        ajusteDados.alterarLivrosBD(livrosAjuste);
     }
 
     public void deleteLivrosModel(Integer codigo) {
         new LivrosBD().deleteLivrosBD(codigo);
+    }
+
+    public void alterarStatusLivrosModel(LivrosModel statusLivrosAjuste) {
+        LivrosBD ajusteDados = new LivrosBD();
+        ajusteDados.alterarStatusLivrosBD(statusLivrosAjuste);
     }
 }

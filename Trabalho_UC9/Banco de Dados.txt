@@ -5,14 +5,18 @@ codigo INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY
 titulo VARCHAR(50),
 genero VARCHAR(50),
 paginas INTEGER,
-sinopse VARCHAR(300)
+sinopse VARCHAR(300),
+status VARCHAR(50)
 );
 
-CREATE TABLE item(
+CREATE TABLE emprestimo(
 codigo INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) PRIMARY KEY,
-status VARCHAR(50),
 dataLocacao varchar(10),
-dataDevolucao varchar(10)
+dataDevolucao varchar(10),
+codigoLivro INTEGER,
+codigoUsuario INTEGER,
+FOREIGN KEY (codigoLivro) REFERENCES livro(codigo),
+FOREIGN KEY (codigoUsuario) REFERENCES usuario(codigo)
 );
 
 CREATE TABLE usuario(
@@ -28,11 +32,4 @@ CREATE TABLE autor(
 codigo INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) PRIMARY KEY,
 nome VARCHAR(50),
 nacionalidade VARCHAR(50)
-);
-
-CREATE TABLE possui(
-codigoLivro INTEGER,
-codigoAutor INTEGER,
-FOREIGN KEY (codigoLivro) REFERENCES livro(codigo),
-FOREIGN KEY (codigoAutor) REFERENCES autor(codigo)
 );

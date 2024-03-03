@@ -17,8 +17,8 @@ import java.util.ArrayList;
 public class LivrosBD {
 
     public void CadastrarLivrosBD(LivrosModel novoLivros) {
-        String sql = "INSERT INTO LIVRO (TITULO, GENERO, PAGINAS, SINOPSE)"
-                + "VALUES(?, ?, ?, ?)";
+        String sql = "INSERT INTO LIVRO (TITULO, GENERO, PAGINAS, SINOPSE, STATUS)"
+                + "VALUES(?, ?, ?, ?, ?)";
         PreparedStatement stmt = null;
         Connection connection = null;
         try {
@@ -28,6 +28,7 @@ public class LivrosBD {
             stmt.setString(2, novoLivros.getGenero());
             stmt.setInt(3, novoLivros.getNumeroPaginas());
             stmt.setString(4, novoLivros.getResumo());
+            stmt.setString(5, novoLivros.getStatus());
             stmt.execute();
             System.out.println("Registro realizado com sucesso!");
         } catch (Exception e) {
@@ -78,6 +79,7 @@ public class LivrosBD {
                     livro.setGenero(rs.getString("GENERO"));
                     livro.setNumeroPaginas(rs.getInt("PAGINAS"));
                     livro.setResumo(rs.getString("SINOPSE"));
+                    livro.setStatus(rs.getString("STATUS"));
                     listaLivros.add(livro);
                 }
             }
@@ -131,12 +133,13 @@ public class LivrosBD {
                     livro.setGenero(rs.getString("GENERO"));
                     livro.setNumeroPaginas(rs.getInt("PAGINAS"));
                     livro.setResumo(rs.getString("SINOPSE"));
+                    livro.setStatus(rs.getString("STATUS"));
                     listaLivros.add(livro);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Erro ao selecionar usuarios!");
+            System.out.println("Erro ao selecionar livros!");
         } finally {
             try {
                 if (stmt != null) {
@@ -164,7 +167,7 @@ public class LivrosBD {
         Connection conn = null;
         PreparedStatement stmt = null;
 
-        String sql = "UPDATE ROOT.LIVRO SET titulo=?, genero=?, paginas=?, sinopse=? where codigo=?";
+        String sql = "UPDATE ROOT.LIVRO SET titulo=?, genero=?, paginas=?, sinopse=?, status=? where codigo=?";
 
         try {
             conn = new ConexaoBD().getConnection();
@@ -173,7 +176,8 @@ public class LivrosBD {
             stmt.setString(2, livroAjuste.getGenero());
             stmt.setInt(3, livroAjuste.getNumeroPaginas());
             stmt.setString(4, livroAjuste.getResumo());
-             stmt.setInt(5, livroAjuste.getCodigo());
+            stmt.setString(5, livroAjuste.getStatus());
+            stmt.setInt(6, livroAjuste.getCodigo());
             stmt.execute();
             System.out.println("Alteração do registro realizada com sucesso!");
         } catch (Exception e) {
@@ -236,5 +240,42 @@ public class LivrosBD {
             }
         }
 
+    }
+
+    public void alterarStatusLivrosBD(LivrosModel statusLivrosAjuste) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
+        String sql = "UPDATE ROOT.LIVRO SET status=? where codigo=?";
+
+        try {
+            conn = new ConexaoBD().getConnection();
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, statusLivrosAjuste.getStatus());
+            stmt.setInt(2, statusLivrosAjuste.getCodigo());
+            stmt.execute();
+            System.out.println("Alteração do registro realizada com sucesso!");
+        } catch (Exception e) {
+            System.out.println("Erro ao realizar a alteração no registro!");
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (Exception e) {
+                System.out.println("Erro ao finalizar steatment!");
+                e.printStackTrace();
+            }
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                System.out.println("Erro ao finalizar conexao com o banco de dados!");
+                e.printStackTrace();
+            }
+        }
     }
 }
