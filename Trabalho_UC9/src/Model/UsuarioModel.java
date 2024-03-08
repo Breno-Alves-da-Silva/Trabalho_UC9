@@ -11,17 +11,21 @@ public class UsuarioModel {
     private String email;
     private String endereço;
     private String dataNascimento;
+    private String status;
+
 
     public UsuarioModel() {
     }
-
-    public UsuarioModel(String nome, String cpf, String email, String endereço, String dataNascimento) {
+    
+    public UsuarioModel(String nome, String cpf, String email, String endereço, String dataNascimento, String status) {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
         this.endereço = endereço;
         this.dataNascimento = dataNascimento;
+        this.status = status;
     }
+
 
     public UsuarioModel(int codigo, String nome, String cpf, String email, String endereço, String dataNascimento) {
         this.codigo = codigo;
@@ -30,6 +34,20 @@ public class UsuarioModel {
         this.email = email;
         this.endereço = endereço;
         this.dataNascimento = dataNascimento;
+    }
+
+    public UsuarioModel(int codigo, String status) {
+        this.codigo = codigo;
+        this.status = status;
+    }
+    
+    
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String Status) {
+        this.status = Status;
     }
 
     public Integer getCodigo() {
@@ -101,5 +119,8 @@ public class UsuarioModel {
     public void deleteUsuarioModel(Integer codigo) {
         new UsuarioBD().deleteUsuarioBD(codigo);
     }
-
+ public void alterarStatusUsuarioModel(UsuarioModel statusUsuarioAjuste) {
+        UsuarioBD ajusteDados = new UsuarioBD();
+        ajusteDados.alterarStatusUsuarioBD(statusUsuarioAjuste);
+    }
 }

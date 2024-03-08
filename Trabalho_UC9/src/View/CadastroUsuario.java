@@ -6,8 +6,13 @@ package View;
 
 import Controller.UsuarioController;
 import Model.UsuarioModel;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -65,21 +70,21 @@ public class CadastroUsuario extends javax.swing.JFrame {
 
         JTUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nome", "CPF", "E-mail", "Endereço", "Data de Nascimento"
+                "ID", "Nome", "CPF", "E-mail", "Endereço", "Data de Nascimento", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -384,16 +389,22 @@ public class CadastroUsuario extends javax.swing.JFrame {
         String email = TxtEmail.getText();
         String endereço = TxtEndereço.getText();
         String dataNascimento = JFDataNas.getText();
+        String status = "Disponivel";
+        
+        if (verificarIdade(dataNascimento)) {
 
-        UsuarioController novoCadastro = new UsuarioController();
+            UsuarioController novoCadastro = new UsuarioController();
 
-        novoCadastro.CadastroUsuarioController(nome, cpf, email, endereço, dataNascimento);
+            novoCadastro.CadastroUsuarioController(nome, cpf, email, endereço, dataNascimento, status);
 
-        TxtNome.setText("");
-        TxtEmail.setText("");
-        TxtEndereço.setText("");
-        JFCpf.setText("");
-        JFDataNas.setText("");
+            TxtNome.setText("");
+            TxtEmail.setText("");
+            TxtEndereço.setText("");
+            JFCpf.setText("");
+            JFDataNas.setText("");
+        } else {
+            JOptionPane.showMessageDialog(null, "O Usuario deve ter pelo menos 14 anos de idade");
+        }
 
         listarUsuariosView();
     }//GEN-LAST:event_BtnSalvarActionPerformed
@@ -476,7 +487,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
 
     private void BtnEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEmprestimoActionPerformed
         // TODO add your handling code here:
-         Emprestimo emprestimo = new Emprestimo();
+        Emprestimo emprestimo = new Emprestimo();
         emprestimo.setVisible(true);
         this.dispose();
 
@@ -579,7 +590,8 @@ public class CadastroUsuario extends javax.swing.JFrame {
                     usuarios.getCpf(),
                     usuarios.getEmail(),
                     usuarios.getEndereço(),
-                    usuarios.getDataNascimento(),});
+                    usuarios.getDataNascimento(),
+                    usuarios.getStatus()});
             }
 
         } catch (Exception e) {
@@ -602,7 +614,8 @@ public class CadastroUsuario extends javax.swing.JFrame {
                 usuarios.getCpf(),
                 usuarios.getEmail(),
                 usuarios.getEndereço(),
-                usuarios.getDataNascimento()});
+                usuarios.getDataNascimento(),
+                usuarios.getStatus()});
         }
 
     }
@@ -622,6 +635,9 @@ public class CadastroUsuario extends javax.swing.JFrame {
                 .toString();
         String dataNascimento = JTUsuario.getModel().
                 getValueAt(JTUsuario.getSelectedRow(), 5)
+                .toString();
+        String status = JTUsuario.getModel().
+                getValueAt(JTUsuario.getSelectedRow(), 6)
                 .toString();
         String idAux = JTUsuario.getModel().
                 getValueAt(JTUsuario.getSelectedRow(), 0)
@@ -644,6 +660,9 @@ public class CadastroUsuario extends javax.swing.JFrame {
         String dataNascimento = JTUsuario.getModel().
                 getValueAt(JTUsuario.getSelectedRow(), 5)
                 .toString();
+        String status = JTUsuario.getModel().
+                getValueAt(JTUsuario.getSelectedRow(), 6)
+                .toString();
         String idAux = JTUsuario.getModel().
                 getValueAt(JTUsuario.getSelectedRow(), 0)
                 .toString();
@@ -657,5 +676,32 @@ public class CadastroUsuario extends javax.swing.JFrame {
 
         BtnSalvar.setEnabled(false);
 
+    }
+
+    private boolean verificarIdade(String dataNascimento) {
+       try {
+        SimpleDateFormat sdf = new SimpleDateFormat("  dd  /  MM  /  yyyy");
+        Date dataNasc = sdf.parse(dataNascimento);
+
+        Calendar dataNascCal = Calendar.getInstance();
+        dataNascCal.setTime(dataNasc);
+
+        Calendar hojeCal = Calendar.getInstance();
+
+        int idade = hojeCal.get(Calendar.YEAR) - dataNascCal.get(Calendar.YEAR);
+
+        // Verificar se o aniversário já ocorreu este ano
+        if (hojeCal.get(Calendar.MONTH) < dataNascCal.get(Calendar.MONTH) ||
+                (hojeCal.get(Calendar.MONTH) == dataNascCal.get(Calendar.MONTH) &&
+                        hojeCal.get(Calendar.DAY_OF_MONTH) < dataNascCal.get(Calendar.DAY_OF_MONTH))) {
+            idade--;
+        }
+
+        // Verificar se a idade é maior ou igual a 13 anos
+        return idade >= 13;
+    } catch (ParseException e) {
+        e.printStackTrace();
+        return false;
+    }
     }
 }

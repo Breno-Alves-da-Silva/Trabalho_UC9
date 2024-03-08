@@ -45,9 +45,8 @@ public class Emprestimo extends javax.swing.JFrame {
         BtnLivro = new javax.swing.JButton();
         BtnAutor = new javax.swing.JButton();
         BtnConfirmar = new javax.swing.JButton();
-        BtnEmprestimo = new javax.swing.JButton();
         BtnDelete = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        BtnDadosEmprestimo = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         JTEmprestimo = new javax.swing.JTable();
         JLIdAuxLivro = new javax.swing.JLabel();
@@ -57,10 +56,7 @@ public class Emprestimo extends javax.swing.JFrame {
 
         JTLivros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Título", "Gênero", "Numero de Paginas", "Resumo", "Status"
@@ -98,21 +94,17 @@ public class Emprestimo extends javax.swing.JFrame {
 
         JTUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "ID", "Nome", "CPF", "E-mail", "Endereço", "Data de Nascimento"
+                "ID", "Nome", "CPF", "E-mail", "Endereço", "Data de Nascimento", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -189,13 +181,6 @@ public class Emprestimo extends javax.swing.JFrame {
             }
         });
 
-        BtnEmprestimo.setText("Dados");
-        BtnEmprestimo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnEmprestimoActionPerformed(evt);
-            }
-        });
-
         BtnDelete.setText("Delete");
         BtnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,10 +188,10 @@ public class Emprestimo extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Emprestimo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnDadosEmprestimo.setText("Emprestimo");
+        BtnDadosEmprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BtnDadosEmprestimoActionPerformed(evt);
             }
         });
 
@@ -230,19 +215,16 @@ public class Emprestimo extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnUsuario))
                     .addGroup(JPEmprestimoLayout.createSequentialGroup()
-                        .addGroup(JPEmprestimoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(JPEmprestimoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(TxtIdUsuario)
-                                .addComponent(TxtIdLivro, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(JPEmprestimoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(TxtIdUsuario)
+                            .addComponent(TxtIdLivro, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(JPEmprestimoLayout.createSequentialGroup()
-                                .addComponent(BtnEmprestimo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(BtnConfirmar)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(BtnDelete)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton1)))
-                        .addContainerGap())))
+                                .addGap(40, 40, 40)
+                                .addComponent(BtnDadosEmprestimo)))
+                        .addContainerGap(82, Short.MAX_VALUE))))
         );
         JPEmprestimoLayout.setVerticalGroup(
             JPEmprestimoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,18 +248,14 @@ public class Emprestimo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(JPEmprestimoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnConfirmar)
-                    .addComponent(BtnEmprestimo)
                     .addComponent(BtnDelete)
-                    .addComponent(jButton1))
+                    .addComponent(BtnDadosEmprestimo))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
         JTEmprestimo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Data Locação", "Data Devolução", "ID Livro", "ID Usuario"
@@ -416,7 +394,7 @@ public class Emprestimo extends javax.swing.JFrame {
 
         String idUsuario = TxtIdUsuario.getText();
         String idLivro = TxtIdLivro.getText();
-        String status = "Não disponivel";
+        String status = "Bloqueado";
         LocalDateTime agora = LocalDateTime.now();
 
         LocalDateTime futuro = agora.plusDays(7);
@@ -438,6 +416,10 @@ public class Emprestimo extends javax.swing.JFrame {
 
         LivrosController AlterarStatusLivros = new LivrosController();
         AlterarStatusLivros.alterarStatusLivrosController(idLivro, status);
+
+        UsuarioController AlterarStatusUsuario = new UsuarioController();
+        AlterarStatusUsuario.alterarStatusUsuarioController(idUsuario, status);
+
         listarLivrosView();
         listarEmprestimoView();
         listarUsuariosView();
@@ -447,15 +429,10 @@ public class Emprestimo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtIdUsuarioActionPerformed
 
-    private void BtnEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEmprestimoActionPerformed
-        // TODO add your handling code here:
-        PreencheDadosLivros();
-        PreencheDadosUsuarios();
-    }//GEN-LAST:event_BtnEmprestimoActionPerformed
-
     private void BtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDeleteActionPerformed
         // TODO add your handling code here:
         String idLivro = TxtIdLivro.getText();
+        String idUsuario = TxtIdUsuario.getText();
         String status = "Disponivel";
         String idAuxiliar = JLIdAux.getText();
 
@@ -468,8 +445,12 @@ public class Emprestimo extends javax.swing.JFrame {
         TxtIdLivro.setText("");
         TxtIdUsuario.setText("");
 
+        UsuarioController AlterarStatusUsuario = new UsuarioController();
+        AlterarStatusUsuario.alterarStatusUsuarioController(idUsuario, status);
+
         LivrosController AlterarStatusLivros = new LivrosController();
         AlterarStatusLivros.alterarStatusLivrosController(idLivro, status);
+
         listarLivrosView();
         listarEmprestimoView();
         listarUsuariosView();
@@ -500,11 +481,11 @@ public class Emprestimo extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_BtnAutorActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BtnDadosEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDadosEmprestimoActionPerformed
         // TODO add your handling code here:
         PreencheDadosEmprestimo();
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BtnDadosEmprestimoActionPerformed
 
     private void BtnLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLivroActionPerformed
         // TODO add your handling code here:
@@ -560,8 +541,8 @@ public class Emprestimo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAutor;
     private javax.swing.JButton BtnConfirmar;
+    private javax.swing.JButton BtnDadosEmprestimo;
     private javax.swing.JButton BtnDelete;
-    private javax.swing.JButton BtnEmprestimo;
     private javax.swing.JButton BtnLivro;
     private javax.swing.JButton BtnUsuario;
     private javax.swing.JLabel JLIdAux;
@@ -575,7 +556,6 @@ public class Emprestimo extends javax.swing.JFrame {
     private javax.swing.JTable JTUsuario;
     private javax.swing.JTextField TxtIdLivro;
     private javax.swing.JTextField TxtIdUsuario;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -603,9 +583,7 @@ public class Emprestimo extends javax.swing.JFrame {
 
         while (iterator.hasNext()) {
             LivrosModel livros = iterator.next();
-
-            if (!"Não disponivel".equals(livros.getStatus())) {
-            } else {
+            if ("Disponivel".equals(livros.getStatus())) {
                 dtm.addRow(new Object[]{
                     livros.getCodigo(),
                     livros.getTitulo(),
@@ -630,13 +608,16 @@ public class Emprestimo extends javax.swing.JFrame {
 
             while (iterator.hasNext()) {
                 UsuarioModel usuarios = iterator.next();
-                dtm.addRow(new Object[]{
-                    usuarios.getCodigo(),
-                    usuarios.getNome(),
-                    usuarios.getCpf(),
-                    usuarios.getEmail(),
-                    usuarios.getEndereço(),
-                    usuarios.getDataNascimento(),});
+                if ("Disponivel".equals(usuarios.getStatus())) {
+                    dtm.addRow(new Object[]{
+                        usuarios.getCodigo(),
+                        usuarios.getNome(),
+                        usuarios.getCpf(),
+                        usuarios.getEmail(),
+                        usuarios.getEndereço(),
+                        usuarios.getDataNascimento(),
+                        usuarios.getStatus()});
+                }
             }
 
         } catch (Exception e) {

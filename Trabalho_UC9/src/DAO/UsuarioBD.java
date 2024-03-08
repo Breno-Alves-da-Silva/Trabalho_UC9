@@ -9,8 +9,8 @@ import java.util.ArrayList;
 public class UsuarioBD {
 
     public void CadastrarUsuarioBD(UsuarioModel novoUsuario) {
-        String sql = "INSERT INTO USUARIO (NOME, CPF, EMAIL, ENDERECO,DATANASCIMENTO)"
-                + "VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO USUARIO (NOME, CPF, EMAIL, ENDERECO, DATANASCIMENTO, STATUS)"
+                + "VALUES(?,?,?,?,?, ?)";
         PreparedStatement stmt = null;
         Connection connection = null;
         try {
@@ -21,6 +21,7 @@ public class UsuarioBD {
             stmt.setString(3, novoUsuario.getEmail());
             stmt.setString(4, novoUsuario.getEndereço());
             stmt.setString(5, novoUsuario.getDataNascimento());
+            stmt.setString(6, novoUsuario.getStatus());
             stmt.execute();
             System.out.println("Registro realizado com sucesso!");
         } catch (Exception e) {
@@ -74,6 +75,7 @@ public class UsuarioBD {
                     usuarios.setEmail(rs.getString("EMAIL"));
                     usuarios.setEndereço(rs.getString("ENDERECO"));
                     usuarios.setDataNascimento(rs.getString("DATANASCIMENTO"));
+                    usuarios.setStatus(rs.getString("STATUS"));
                     listaUsuarios.add(usuarios);
                 }
             }
@@ -127,6 +129,7 @@ public class UsuarioBD {
                     usuarios.setEmail(rs.getString("EMAIL"));
                     usuarios.setEndereço(rs.getString("ENDERECO"));
                     usuarios.setDataNascimento(rs.getString("DATANASCIMENTO"));
+                    usuarios.setStatus(rs.getString("STATUS"));
                     listaUsuarios.add(usuarios);
                 }
             }
@@ -160,7 +163,7 @@ public class UsuarioBD {
         Connection conn = null;
         PreparedStatement stmt = null;
         
-        String sql = "UPDATE ROOT.USUARIO SET nome=?, cpf=?, email=?, endereco=?, datanascimento=? where codigo=?";
+        String sql = "UPDATE ROOT.USUARIO SET nome=?, cpf=?, email=?, endereco=?, datanascimento=?, status=? where codigo=?";
         
         try {
             conn = new ConexaoBD().getConnection();
@@ -170,7 +173,8 @@ public class UsuarioBD {
             stmt.setString(3, usuarioAjuste.getEmail());
             stmt.setString(4, usuarioAjuste.getEndereço());
             stmt.setString(5, usuarioAjuste.getDataNascimento());
-            stmt.setInt(6, usuarioAjuste.getCodigo());
+            stmt.setString(6, usuarioAjuste.getStatus());           
+            stmt.setInt(7, usuarioAjuste.getCodigo());
             stmt.execute();
             System.out.println("Alteração do registro realizada com sucesso!");
         } catch (Exception e) {
@@ -234,6 +238,42 @@ public class UsuarioBD {
         }
         
     }
+
+    public void alterarStatusUsuarioBD(UsuarioModel statusUsuarioAjuste) {
+     Connection conn = null;
+        PreparedStatement stmt = null;
+
+        String sql = "UPDATE ROOT.USUARIO SET status=? where codigo=?";
+
+        try {
+            conn = new ConexaoBD().getConnection();
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, statusUsuarioAjuste.getStatus());
+            stmt.setInt(2, statusUsuarioAjuste.getCodigo());
+            stmt.execute();
+            System.out.println("Alteração do registro realizada com sucesso!");
+        } catch (Exception e) {
+            System.out.println("Erro ao realizar a alteração no registro!");
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (Exception e) {
+                System.out.println("Erro ao finalizar steatment!");
+                e.printStackTrace();
+            }
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                System.out.println("Erro ao finalizar conexao com o banco de dados!");
+                e.printStackTrace();
+            }
+        }}
 
 
 }

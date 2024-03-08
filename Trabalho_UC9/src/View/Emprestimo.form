@@ -101,7 +101,7 @@
         <Component class="javax.swing.JTable" name="JTLivros">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="6" rowCount="4">
+              <Table columnCount="6" rowCount="0">
                 <Column editable="false" title="ID" type="java.lang.String"/>
                 <Column editable="false" title="T&#xed;tulo" type="java.lang.String"/>
                 <Column editable="false" title="G&#xea;nero" type="java.lang.String"/>
@@ -166,14 +166,54 @@
         <Component class="javax.swing.JTable" name="JTUsuario">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="6" rowCount="5">
+              <Table columnCount="7" rowCount="0">
                 <Column editable="false" title="ID" type="java.lang.Integer"/>
                 <Column editable="false" title="Nome" type="java.lang.String"/>
                 <Column editable="false" title="CPF" type="java.lang.String"/>
                 <Column editable="false" title="E-mail" type="java.lang.String"/>
                 <Column editable="false" title="Endere&#xe7;o" type="java.lang.String"/>
                 <Column editable="false" title="Data de Nascimento" type="java.lang.String"/>
+                <Column editable="false" title="Status" type="java.lang.String"/>
               </Table>
+            </Property>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+              </TableColumnModel>
             </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -219,22 +259,18 @@
                           <Component id="BtnUsuario" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="TxtIdUsuario" max="32767" attributes="0"/>
-                                  <Component id="TxtIdLivro" min="-2" pref="276" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="BtnEmprestimo" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="TxtIdUsuario" max="32767" attributes="0"/>
+                              <Component id="TxtIdLivro" min="-2" pref="276" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
                                   <Component id="BtnConfirmar" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                                   <Component id="BtnDelete" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                  <Component id="BtnDadosEmprestimo" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="82" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -267,9 +303,8 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="BtnConfirmar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="BtnEmprestimo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="BtnDelete" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="BtnDadosEmprestimo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="20" max="32767" attributes="0"/>
               </Group>
@@ -359,14 +394,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnConfirmarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="BtnEmprestimo">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Dados"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnEmprestimoActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JButton" name="BtnDelete">
           <Properties>
             <Property name="text" type="java.lang.String" value="Delete"/>
@@ -375,12 +402,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnDeleteActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="BtnDadosEmprestimo">
           <Properties>
             <Property name="text" type="java.lang.String" value="Emprestimo"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnDadosEmprestimoActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -395,7 +422,7 @@
         <Component class="javax.swing.JTable" name="JTEmprestimo">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="5" rowCount="4">
+              <Table columnCount="5" rowCount="0">
                 <Column editable="false" title="ID" type="java.lang.String"/>
                 <Column editable="false" title="Data Loca&#xe7;&#xe3;o" type="java.lang.String"/>
                 <Column editable="false" title="Data Devolu&#xe7;&#xe3;o" type="java.lang.String"/>
