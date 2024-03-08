@@ -11,8 +11,8 @@ status VARCHAR(50)
 
 CREATE TABLE emprestimo(
 codigo INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) PRIMARY KEY,
-dataLocacao varchar(10),
-dataDevolucao varchar(10),
+dataLocacao varchar(100),
+dataDevolucao varchar(100),
 codigoLivro INTEGER,
 codigoUsuario INTEGER,
 FOREIGN KEY (codigoLivro) REFERENCES livro(codigo),

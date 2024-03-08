@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class EmprestimoBD {
 
     public void CadastrarEmprestimoBD(EmprestimoModel novoEmprestimo) {
-        String sql = "INSERT INTO LIVRO (DATALOCACAO, DATADEVOLUCAO, CODIGOLIVRO, CODIGOUSUARIO)"
+        String sql = "INSERT INTO EMPRESTIMO (DATALOCACAO, DATADEVOLUCAO, CODIGOLIVRO, CODIGOUSUARIO)"
                 + "VALUES(?, ?, ?, ?)";
         PreparedStatement stmt = null;
         Connection connection = null;

@@ -51,9 +51,9 @@ public class CadastroAutor extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         JTAutor = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        BtnUsuario = new javax.swing.JButton();
+        BtnLivro = new javax.swing.JButton();
+        BtnEmprestimo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -235,17 +235,32 @@ public class CadastroAutor extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton3.setText("Usuario");
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        BtnUsuario.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        BtnUsuario.setText("Usuario");
+        BtnUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnUsuarioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BtnUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jButton2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton2.setText("Livro");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 65, -1));
+        BtnLivro.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        BtnLivro.setText("Livro");
+        BtnLivro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnLivroActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BtnLivro, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 65, -1));
 
-        jButton1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton1.setText("Emprestimo");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, -1, -1));
+        BtnEmprestimo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        BtnEmprestimo.setText("Emprestimo");
+        BtnEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEmprestimoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BtnEmprestimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -354,7 +369,7 @@ public class CadastroAutor extends javax.swing.JFrame {
 
     private void JTAutorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTAutorMouseClicked
         // TODO add your handling code here:
-          CapturaDados();
+        CapturaDados();
     }//GEN-LAST:event_JTAutorMouseClicked
 
     private void JTAutorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTAutorKeyPressed
@@ -368,6 +383,27 @@ public class CadastroAutor extends javax.swing.JFrame {
         String id = JTAutor.getModel().getValueAt(JTAutor.getSelectedRow(), 0).toString();
 
     }//GEN-LAST:event_JTAutorKeyReleased
+
+    private void BtnEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEmprestimoActionPerformed
+        // TODO add your handling code here:
+        Emprestimo emprestimo = new Emprestimo();
+        emprestimo.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnEmprestimoActionPerformed
+
+    private void BtnLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLivroActionPerformed
+        // TODO add your handling code here:
+        CadastroLivro livro = new CadastroLivro();
+        livro.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnLivroActionPerformed
+
+    private void BtnUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUsuarioActionPerformed
+        // TODO add your handling code here:
+        CadastroUsuario usuario = new CadastroUsuario();
+        usuario.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -409,8 +445,11 @@ public class CadastroAutor extends javax.swing.JFrame {
     private javax.swing.JButton BtnAlterar;
     private javax.swing.JButton BtnConfirma;
     private javax.swing.JButton BtnDeletar;
+    private javax.swing.JButton BtnEmprestimo;
+    private javax.swing.JButton BtnLivro;
     private javax.swing.JButton BtnPesquisa;
     private javax.swing.JButton BtnSalvar;
+    private javax.swing.JButton BtnUsuario;
     private javax.swing.JLabel JLId;
     private javax.swing.JLabel JLNacionalidade;
     private javax.swing.JLabel JLNome;
@@ -422,9 +461,6 @@ public class CadastroAutor extends javax.swing.JFrame {
     private javax.swing.JTextField TxtNacionalidade;
     private javax.swing.JTextField TxtNome;
     private javax.swing.JTextField TxtPesquisa;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
@@ -449,23 +485,21 @@ public class CadastroAutor extends javax.swing.JFrame {
 
     private void listarAutorView() {
 
-       
-            DefaultTableModel dtm = (DefaultTableModel) JTAutor.getModel();
-            dtm.setRowCount(0);
-            AutorController autorController = new AutorController();
-            ArrayList<AutorModel> listarAutor = autorController.listarAutorController();
+        DefaultTableModel dtm = (DefaultTableModel) JTAutor.getModel();
+        dtm.setRowCount(0);
+        AutorController autorController = new AutorController();
+        ArrayList<AutorModel> listarAutor = autorController.listarAutorController();
 
-            Iterator<AutorModel> iterator = listarAutor.iterator();
+        Iterator<AutorModel> iterator = listarAutor.iterator();
 
-            while (iterator.hasNext()) {
-                AutorModel autor = iterator.next();
-                dtm.addRow(new Object[]{
-                    autor.getCodigo(),
-                    autor.getNome(),
-                    autor.getNacionalidade()});
-            }
+        while (iterator.hasNext()) {
+            AutorModel autor = iterator.next();
+            dtm.addRow(new Object[]{
+                autor.getCodigo(),
+                autor.getNome(),
+                autor.getNacionalidade()});
+        }
 
-        
     }
 
     private void filtrarAutor(String nome) {
@@ -485,7 +519,7 @@ public class CadastroAutor extends javax.swing.JFrame {
     }
 
     private void CapturaDados() {
-    
+
         String nome = JTAutor.getModel().
                 getValueAt(JTAutor.getSelectedRow(), 1)
                 .toString();
@@ -495,5 +529,5 @@ public class CadastroAutor extends javax.swing.JFrame {
         String idAux = JTAutor.getModel().
                 getValueAt(JTAutor.getSelectedRow(), 0)
                 .toString();
-    } 
+    }
 }

@@ -56,9 +56,9 @@ public class CadastroUsuario extends javax.swing.JFrame {
         JLTitulo = new javax.swing.JLabel();
         JLNome = new javax.swing.JLabel();
         TxtNome = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        BtnLivro = new javax.swing.JButton();
+        BtnAutor = new javax.swing.JButton();
+        BtnEmprestimo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -243,13 +243,28 @@ public class CadastroUsuario extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton1.setText("Livro");
+        BtnLivro.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        BtnLivro.setText("Livro");
+        BtnLivro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnLivroActionPerformed(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton2.setText("Autor");
+        BtnAutor.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        BtnAutor.setText("Autor");
+        BtnAutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAutorActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Emprestimo");
+        BtnEmprestimo.setText("Emprestimo");
+        BtnEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEmprestimoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout JPCadastroUsuarioLayout = new javax.swing.GroupLayout(JPCadastroUsuario);
         JPCadastroUsuario.setLayout(JPCadastroUsuarioLayout);
@@ -274,11 +289,11 @@ public class CadastroUsuario extends javax.swing.JFrame {
                             .addComponent(TxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(JLTitulo))
                         .addGap(123, 123, 123)
-                        .addComponent(jButton1)
+                        .addComponent(BtnLivro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(BtnAutor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)))
+                        .addComponent(BtnEmprestimo)))
                 .addContainerGap())
         );
         JPCadastroUsuarioLayout.setVerticalGroup(
@@ -308,10 +323,11 @@ public class CadastroUsuario extends javax.swing.JFrame {
                         .addGroup(JPCadastroUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(JLEmail)
                             .addComponent(TxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(JPCadastroUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1)
-                        .addComponent(jButton2)
-                        .addComponent(jButton3)))
+                    .addGroup(JPCadastroUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(BtnLivro, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(JPCadastroUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(BtnAutor)
+                            .addComponent(BtnEmprestimo))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -425,7 +441,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
         TxtEndereço.setText("");
         JFCpf.setText("");
         JFDataNas.setText("");
-        
+
         BtnSalvar.setEnabled(true);
     }//GEN-LAST:event_BtnDeletarActionPerformed
 
@@ -451,12 +467,34 @@ public class CadastroUsuario extends javax.swing.JFrame {
         String email = TxtEmail.getText();
         String endereço = TxtEndereço.getText();
         String dataNascimento = JFDataNas.getText();
-        
+
         UsuarioController AlterarUsuario = new UsuarioController();
         AlterarUsuario.alterarUsuarioController(idAux, nome, cpf, email, endereço, dataNascimento);
         BtnSalvar.setEnabled(true);
         listarUsuariosView();
     }//GEN-LAST:event_BtnConfirmaActionPerformed
+
+    private void BtnEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEmprestimoActionPerformed
+        // TODO add your handling code here:
+         Emprestimo emprestimo = new Emprestimo();
+        emprestimo.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_BtnEmprestimoActionPerformed
+
+    private void BtnLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLivroActionPerformed
+        // TODO add your handling code here:
+        CadastroLivro livro = new CadastroLivro();
+        livro.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnLivroActionPerformed
+
+    private void BtnAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAutorActionPerformed
+        // TODO add your handling code here:
+        CadastroAutor autor = new CadastroAutor();
+        autor.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnAutorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -495,8 +533,11 @@ public class CadastroUsuario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAlterar;
+    private javax.swing.JButton BtnAutor;
     private javax.swing.JButton BtnConfirma;
     private javax.swing.JButton BtnDeletar;
+    private javax.swing.JButton BtnEmprestimo;
+    private javax.swing.JButton BtnLivro;
     private javax.swing.JButton BtnPesquisa;
     private javax.swing.JButton BtnSalvar;
     private javax.swing.JFormattedTextField JFCpf;
@@ -516,9 +557,6 @@ public class CadastroUsuario extends javax.swing.JFrame {
     private javax.swing.JTextField TxtEndereço;
     private javax.swing.JTextField TxtNome;
     private javax.swing.JTextField TxtPesquisa;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
@@ -591,7 +629,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
     }
 
     private void preencheDados() {
-         String nome = JTUsuario.getModel().
+        String nome = JTUsuario.getModel().
                 getValueAt(JTUsuario.getSelectedRow(), 1)
                 .toString();
         String cpf = JTUsuario.getModel().
@@ -609,14 +647,14 @@ public class CadastroUsuario extends javax.swing.JFrame {
         String idAux = JTUsuario.getModel().
                 getValueAt(JTUsuario.getSelectedRow(), 0)
                 .toString();
-        
+
         TxtNome.setText(nome);
         JFCpf.setText(cpf);
         TxtEmail.setText(email);
         TxtEndereço.setText(endereço);
         JFDataNas.setText(dataNascimento);
         LBId.setText(idAux);
-        
+
         BtnSalvar.setEnabled(false);
 
     }

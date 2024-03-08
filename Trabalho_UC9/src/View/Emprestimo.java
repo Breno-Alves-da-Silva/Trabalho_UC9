@@ -1,11 +1,16 @@
 package View;
 
+import Controller.EmprestimoController;
 import Controller.LivrosController;
 import Controller.UsuarioController;
+import Model.EmprestimoModel;
 import Model.LivrosModel;
 import Model.UsuarioModel;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Emprestimo extends javax.swing.JFrame {
@@ -14,6 +19,7 @@ public class Emprestimo extends javax.swing.JFrame {
         initComponents();
         listarLivrosView();
         listarUsuariosView();
+        listarEmprestimoView();
     }
 
     /**
@@ -40,10 +46,12 @@ public class Emprestimo extends javax.swing.JFrame {
         BtnAutor = new javax.swing.JButton();
         BtnConfirmar = new javax.swing.JButton();
         BtnEmprestimo = new javax.swing.JButton();
+        BtnDelete = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         JTEmprestimo = new javax.swing.JTable();
         JLIdAuxLivro = new javax.swing.JLabel();
-        JLIdAuxUsuario = new javax.swing.JLabel();
+        JLIdAux = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,7 +70,7 @@ public class Emprestimo extends javax.swing.JFrame {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -152,12 +160,27 @@ public class Emprestimo extends javax.swing.JFrame {
 
         BtnUsuario.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         BtnUsuario.setText("Usuario");
+        BtnUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnUsuarioActionPerformed(evt);
+            }
+        });
 
         BtnLivro.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         BtnLivro.setText("Livro");
+        BtnLivro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnLivroActionPerformed(evt);
+            }
+        });
 
         BtnAutor.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         BtnAutor.setText("Autor");
+        BtnAutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAutorActionPerformed(evt);
+            }
+        });
 
         BtnConfirmar.setText("Confirmar");
         BtnConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -170,6 +193,20 @@ public class Emprestimo extends javax.swing.JFrame {
         BtnEmprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnEmprestimoActionPerformed(evt);
+            }
+        });
+
+        BtnDelete.setText("Delete");
+        BtnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnDeleteActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Emprestimo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -200,7 +237,11 @@ public class Emprestimo extends javax.swing.JFrame {
                             .addGroup(JPEmprestimoLayout.createSequentialGroup()
                                 .addComponent(BtnEmprestimo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(BtnConfirmar)))
+                                .addComponent(BtnConfirmar)
+                                .addGap(18, 18, 18)
+                                .addComponent(BtnDelete)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1)))
                         .addContainerGap())))
         );
         JPEmprestimoLayout.setVerticalGroup(
@@ -225,7 +266,9 @@ public class Emprestimo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(JPEmprestimoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnConfirmar)
-                    .addComponent(BtnEmprestimo))
+                    .addComponent(BtnEmprestimo)
+                    .addComponent(BtnDelete)
+                    .addComponent(jButton1))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -237,7 +280,7 @@ public class Emprestimo extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID", "ID Usuario", "ID Livro", "Data Locação", "Data Devolução"
+                "ID", "Data Locação", "Data Devolução", "ID Livro", "ID Usuario"
             }
         ) {
             Class[] types = new Class [] {
@@ -253,6 +296,19 @@ public class Emprestimo extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        JTEmprestimo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JTEmprestimoMouseClicked(evt);
+            }
+        });
+        JTEmprestimo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JTEmprestimoKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JTEmprestimoKeyReleased(evt);
             }
         });
         jScrollPane2.setViewportView(JTEmprestimo);
@@ -282,17 +338,17 @@ public class Emprestimo extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(113, 113, 113)
                         .addComponent(JPEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(379, 379, 379)
                     .addComponent(JLIdAuxLivro)
-                    .addContainerGap(422, Short.MAX_VALUE)))
+                    .addContainerGap(413, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(380, 380, 380)
-                    .addComponent(JLIdAuxUsuario)
-                    .addContainerGap(421, Short.MAX_VALUE)))
+                    .addComponent(JLIdAux)
+                    .addContainerGap(412, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,7 +357,7 @@ public class Emprestimo extends javax.swing.JFrame {
                 .addComponent(JPEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -314,7 +370,7 @@ public class Emprestimo extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(300, 300, 300)
-                    .addComponent(JLIdAuxUsuario)
+                    .addComponent(JLIdAux)
                     .addContainerGap(316, Short.MAX_VALUE)))
         );
 
@@ -357,14 +413,34 @@ public class Emprestimo extends javax.swing.JFrame {
 
     private void BtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmarActionPerformed
         // TODO add your handling code here:
+
         String idUsuario = TxtIdUsuario.getText();
         String idLivro = TxtIdLivro.getText();
         String status = "Não disponivel";
+        LocalDateTime agora = LocalDateTime.now();
+
+        LocalDateTime futuro = agora.plusDays(7);
+
+        DateTimeFormatter formatoBrasileiro = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+        String dataRegistro = agora.format(formatoBrasileiro);
+        String dataFutura = futuro.format(formatoBrasileiro);
+
+        Integer codUsuario = Integer.parseInt(idUsuario);
+        Integer codLivro = Integer.parseInt(idLivro);
+
+        EmprestimoController novoCadastro = new EmprestimoController();
+
+        novoCadastro.CadastroEmprestimoController(dataRegistro, dataFutura, codLivro, codUsuario);
+
+        TxtIdUsuario.setText("");
+        TxtIdLivro.setText("");
 
         LivrosController AlterarStatusLivros = new LivrosController();
         AlterarStatusLivros.alterarStatusLivrosController(idLivro, status);
         listarLivrosView();
-
+        listarEmprestimoView();
+        listarUsuariosView();
     }//GEN-LAST:event_BtnConfirmarActionPerformed
 
     private void TxtIdUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtIdUsuarioActionPerformed
@@ -376,6 +452,74 @@ public class Emprestimo extends javax.swing.JFrame {
         PreencheDadosLivros();
         PreencheDadosUsuarios();
     }//GEN-LAST:event_BtnEmprestimoActionPerformed
+
+    private void BtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDeleteActionPerformed
+        // TODO add your handling code here:
+        String idLivro = TxtIdLivro.getText();
+        String status = "Disponivel";
+        String idAuxiliar = JLIdAux.getText();
+
+        Integer id = Integer.valueOf(idAuxiliar);
+
+        EmprestimoController excluirEmprestimo = new EmprestimoController();
+        excluirEmprestimo.excluirEmprestimoController(id);
+        listarLivrosView();
+
+        TxtIdLivro.setText("");
+        TxtIdUsuario.setText("");
+
+        LivrosController AlterarStatusLivros = new LivrosController();
+        AlterarStatusLivros.alterarStatusLivrosController(idLivro, status);
+        listarLivrosView();
+        listarEmprestimoView();
+        listarUsuariosView();
+    }//GEN-LAST:event_BtnDeleteActionPerformed
+
+    private void JTEmprestimoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTEmprestimoMouseClicked
+        // TODO add your handling code here:
+        CapturaDadosEmprestimo();
+    }//GEN-LAST:event_JTEmprestimoMouseClicked
+
+    private void JTEmprestimoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTEmprestimoKeyReleased
+        // TODO add your handling code here:
+        String id = JTEmprestimo.getModel().getValueAt(JTEmprestimo.getSelectedRow(), 0).toString();
+
+    }//GEN-LAST:event_JTEmprestimoKeyReleased
+
+    private void JTEmprestimoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTEmprestimoKeyPressed
+        // TODO add your handling code here:
+        String id = JTEmprestimo.getModel().getValueAt(JTEmprestimo.getSelectedRow(), 0).toString();
+
+    }//GEN-LAST:event_JTEmprestimoKeyPressed
+
+    private void BtnAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAutorActionPerformed
+        // TODO add your handling code here:
+
+        CadastroAutor autor = new CadastroAutor();
+        autor.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnAutorActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        PreencheDadosEmprestimo();
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void BtnLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLivroActionPerformed
+        // TODO add your handling code here:
+        CadastroLivro livro = new CadastroLivro();
+        livro.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_BtnLivroActionPerformed
+
+    private void BtnUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUsuarioActionPerformed
+        // TODO add your handling code here:
+        CadastroUsuario usuario = new CadastroUsuario();
+        usuario.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -416,11 +560,12 @@ public class Emprestimo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAutor;
     private javax.swing.JButton BtnConfirmar;
+    private javax.swing.JButton BtnDelete;
     private javax.swing.JButton BtnEmprestimo;
     private javax.swing.JButton BtnLivro;
     private javax.swing.JButton BtnUsuario;
+    private javax.swing.JLabel JLIdAux;
     private javax.swing.JLabel JLIdAuxLivro;
-    private javax.swing.JLabel JLIdAuxUsuario;
     private javax.swing.JLabel JLIdLivro;
     private javax.swing.JLabel JLIdUsuario;
     private javax.swing.JLabel JLTitulo;
@@ -430,20 +575,21 @@ public class Emprestimo extends javax.swing.JFrame {
     private javax.swing.JTable JTUsuario;
     private javax.swing.JTextField TxtIdLivro;
     private javax.swing.JTextField TxtIdUsuario;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 
     private void CapturaDadosUsuario() {
-        String idAuxUsuario = JTLivros.getModel().
-                getValueAt(JTLivros.getSelectedRow(), 0)
+        String idAuxUsuario = JTUsuario.getModel().
+                getValueAt(JTUsuario.getSelectedRow(), 0)
                 .toString();
     }
 
     private void CapturaDadosLivros() {
-        String idAuxLivro = JTUsuario.getModel().
-                getValueAt(JTUsuario.getSelectedRow(), 0)
+        String idAuxLivro = JTLivros.getModel().
+                getValueAt(JTLivros.getSelectedRow(), 0)
                 .toString();
     }
 
@@ -457,13 +603,17 @@ public class Emprestimo extends javax.swing.JFrame {
 
         while (iterator.hasNext()) {
             LivrosModel livros = iterator.next();
-            dtm.addRow(new Object[]{
-                livros.getCodigo(),
-                livros.getTitulo(),
-                livros.getGenero(),
-                livros.getNumeroPaginas(),
-                livros.getResumo(),
-                livros.getStatus()});
+
+            if (!"Não disponivel".equals(livros.getStatus())) {
+            } else {
+                dtm.addRow(new Object[]{
+                    livros.getCodigo(),
+                    livros.getTitulo(),
+                    livros.getGenero(),
+                    livros.getNumeroPaginas(),
+                    livros.getResumo(),
+                    livros.getStatus()});
+            }
         }
     }
 
@@ -502,10 +652,69 @@ public class Emprestimo extends javax.swing.JFrame {
     }
 
     private void PreencheDadosLivros() {
-        String idAux = JTUsuario.getModel().
-                getValueAt(JTUsuario.getSelectedRow(), 0)
+        String idAux = JTLivros.getModel().
+                getValueAt(JTLivros.getSelectedRow(), 0)
                 .toString();
 
         TxtIdLivro.setText(idAux);
+    }
+
+    private void PreencheDadosEmprestimo() {
+        String idAux = JTEmprestimo.getModel().
+                getValueAt(JTEmprestimo.getSelectedRow(), 0)
+                .toString();
+        String dataLocacao = JTEmprestimo.getModel().
+                getValueAt(JTEmprestimo.getSelectedRow(), 1)
+                .toString();
+        String dataDevolucao = JTEmprestimo.getModel().
+                getValueAt(JTEmprestimo.getSelectedRow(), 2)
+                .toString();
+        String idLivro = JTEmprestimo.getModel().
+                getValueAt(JTEmprestimo.getSelectedRow(), 3)
+                .toString();
+        String idUsuario = JTEmprestimo.getModel().
+                getValueAt(JTEmprestimo.getSelectedRow(), 4)
+                .toString();
+
+        JLIdAux.setText(idAux);
+        TxtIdLivro.setText(idLivro);
+        TxtIdUsuario.setText(idUsuario);
+    }
+
+    private void listarEmprestimoView() {
+        DefaultTableModel dtm = (DefaultTableModel) JTEmprestimo.getModel();
+        dtm.setRowCount(0);
+        EmprestimoController emprestimoController = new EmprestimoController();
+        ArrayList<EmprestimoModel> listarEmprestimo = emprestimoController.listarEmprestimoController();
+
+        Iterator<EmprestimoModel> iterator = listarEmprestimo.iterator();
+
+        while (iterator.hasNext()) {
+            EmprestimoModel emprestimo = iterator.next();
+            dtm.addRow(new Object[]{
+                emprestimo.getCodigo(),
+                emprestimo.getDataLocacao(),
+                emprestimo.getDataDevolucao(),
+                emprestimo.getCodigoLivro(),
+                emprestimo.getCodigoUsuario()});
+        }
+    }
+
+    private void CapturaDadosEmprestimo() {
+        String dataLocacao = JTEmprestimo.getModel().
+                getValueAt(JTEmprestimo.getSelectedRow(), 1)
+                .toString();
+        String dataDevolucao = JTEmprestimo.getModel().
+                getValueAt(JTEmprestimo.getSelectedRow(), 2)
+                .toString();
+        String idLivro = JTEmprestimo.getModel().
+                getValueAt(JTEmprestimo.getSelectedRow(), 3)
+                .toString();
+        String idUsuario = JTEmprestimo.getModel().
+                getValueAt(JTEmprestimo.getSelectedRow(), 4)
+                .toString();
+        String idAux = JTEmprestimo.getModel().
+                getValueAt(JTEmprestimo.getSelectedRow(), 0)
+                .toString();
     }
 }

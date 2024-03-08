@@ -55,9 +55,9 @@ public class CadastroLivro extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         JTAResumo = new javax.swing.JTextArea();
         JLCadastroLivro = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        BtnUsuario = new javax.swing.JButton();
+        BtnEmprestimo = new javax.swing.JButton();
+        BtnAutor = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -218,14 +218,29 @@ public class CadastroLivro extends javax.swing.JFrame {
         JLCadastroLivro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         JLCadastroLivro.setText("Cadastro Do Livro");
 
-        jButton1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton1.setText("Livro");
+        BtnUsuario.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        BtnUsuario.setText("Usuario");
+        BtnUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnUsuarioActionPerformed(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton2.setText("Emprestimo ");
+        BtnEmprestimo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        BtnEmprestimo.setText("Emprestimo ");
+        BtnEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEmprestimoActionPerformed(evt);
+            }
+        });
 
-        jButton3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton3.setText("Autor");
+        BtnAutor.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        BtnAutor.setText("Autor");
+        BtnAutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAutorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout JPCadastroLivroLayout = new javax.swing.GroupLayout(JPCadastroLivro);
         JPCadastroLivro.setLayout(JPCadastroLivroLayout);
@@ -251,11 +266,11 @@ public class CadastroLivro extends javax.swing.JFrame {
                 .addGap(310, 310, 310)
                 .addComponent(JLCadastroLivro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(BtnAutor)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(BtnUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2))
+                .addComponent(BtnEmprestimo))
         );
         JPCadastroLivroLayout.setVerticalGroup(
             JPCadastroLivroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,9 +280,9 @@ public class CadastroLivro extends javax.swing.JFrame {
                         .addGap(13, 13, 13)
                         .addComponent(JLCadastroLivro))
                     .addGroup(JPCadastroLivroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2)
-                        .addComponent(jButton1)
-                        .addComponent(jButton3)))
+                        .addComponent(BtnEmprestimo)
+                        .addComponent(BtnUsuario)
+                        .addComponent(BtnAutor)))
                 .addGap(44, 44, 44)
                 .addGroup(JPCadastroLivroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JLTitulo)
@@ -366,7 +381,7 @@ public class CadastroLivro extends javax.swing.JFrame {
         String genero = TxtGenero.getText();
         String numeroPaginasT = TxtNumeroPaginas.getText();
         String resumo = JTAResumo.getText();
-         String status = "Disponivel";
+        String status = "Disponivel";
 
         Integer numeroPaginas = Integer.parseInt(numeroPaginasT);
 
@@ -399,7 +414,6 @@ public class CadastroLivro extends javax.swing.JFrame {
         String genero = TxtGenero.getText();
         String numeroPaginasT = TxtNumeroPaginas.getText();
         String resumo = JTAResumo.getText();
-       
 
         Integer numeroPaginas = Integer.parseInt(numeroPaginasT);
 
@@ -425,6 +439,27 @@ public class CadastroLivro extends javax.swing.JFrame {
         String id = JTLivros.getModel().getValueAt(JTLivros.getSelectedRow(), 0).toString();
 
     }//GEN-LAST:event_JTLivrosKeyReleased
+
+    private void BtnAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAutorActionPerformed
+        // TODO add your handling code here:
+        CadastroAutor autor = new CadastroAutor();
+        autor.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnAutorActionPerformed
+
+    private void BtnUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUsuarioActionPerformed
+        // TODO add your handling code here:
+        CadastroUsuario usuario = new CadastroUsuario();
+        usuario.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnUsuarioActionPerformed
+
+    private void BtnEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEmprestimoActionPerformed
+        // TODO add your handling code here:
+        Emprestimo emprestimo = new Emprestimo();
+        emprestimo.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnEmprestimoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -463,10 +498,13 @@ public class CadastroLivro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAlterar;
+    private javax.swing.JButton BtnAutor;
     private javax.swing.JButton BtnConfirma;
     private javax.swing.JButton BtnDeletar;
+    private javax.swing.JButton BtnEmprestimo;
     private javax.swing.JButton BtnPesquisa;
     private javax.swing.JButton BtnSalvar;
+    private javax.swing.JButton BtnUsuario;
     private javax.swing.JLabel JLCadastroLivro;
     private javax.swing.JLabel JLGenero;
     private javax.swing.JLabel JLId;
@@ -482,9 +520,6 @@ public class CadastroLivro extends javax.swing.JFrame {
     private javax.swing.JTextField TxtNumeroPaginas;
     private javax.swing.JTextField TxtPesquisa;
     private javax.swing.JTextField TxtTituloLivro;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
@@ -553,19 +588,18 @@ public class CadastroLivro extends javax.swing.JFrame {
         TxtNumeroPaginas.setText(numeroPaginas);
         JTAResumo.setText(resumo);
         JLId.setText(idAux);
-        
 
         BtnSalvar.setEnabled(false);
     }
 
     private void CapturaDados() {
-        String titulo= JTLivros.getModel().
+        String titulo = JTLivros.getModel().
                 getValueAt(JTLivros.getSelectedRow(), 1)
                 .toString();
         String genero = JTLivros.getModel().
                 getValueAt(JTLivros.getSelectedRow(), 2)
                 .toString();
-        String numeroPaginas= JTLivros.getModel().
+        String numeroPaginas = JTLivros.getModel().
                 getValueAt(JTLivros.getSelectedRow(), 3)
                 .toString();
         String resumo = JTLivros.getModel().
